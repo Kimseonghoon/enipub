@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GeneralInfoSqlMap" >
+	<!-- select Query -->
+	<select id="selectCompanyData" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			address a, companybaseinfo b
+		WHERE
+			"a.assignuuid"=#{item_id} and "b.companycode"=#{item_id};
+	</select>
+	<!-- 
+	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			*
+		FROM
+			"rel_product_international"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			*
+		FROM
+			"rel_product_org"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectStdProductItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			* 
+		FROM 
+			"product"
+		WHERE
+			"class_code"=#{item_id}
+	</select>
+	
+	<select id="selectStdEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			"rel_product_org"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectInterSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			 R.product_code, R.international_code, R.international, O.class_name
+		FROM 
+			"rel_product_international" R			
+			LEFT JOIN 
+				"product" O		
+			ON
+				R.product_code = O.class_code		
+		WHERE
+			R.international_code
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select>
+	
+	<select id="selectDescSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			"product"
+		WHERE
+			"class_name"
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select>
+	
+	<select id="selectEvaTestSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			R.product_code, R.organization_code, O.class_name
+		FROM 
+			"rel_product_org" R
+			LEFT JOIN
+				"product" O
+			ON
+				R.product_code = O.class_code
+		WHERE
+			R.organization_code
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select> -->
+	
+</mapper>
