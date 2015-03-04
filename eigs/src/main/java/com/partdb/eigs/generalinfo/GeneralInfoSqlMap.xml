@@ -9,7 +9,25 @@
 		FROM 
 			address a, companybaseinfo b
 		WHERE
-			a.assignuuid=#{companyId} and b.companycode=#{companyId};
+			a.assignuuid=#{id} and b.companycode=#{id};
+	</select>
+	
+	<select id="selectCompanyOrgTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			orguuid, division, jobtitle, name, jobtitle, address_line1, address_line2, townorcity, postcode, country, tel, email
+		FROM 
+			address a, companyorganization b
+		WHERE
+			a.assignuuid=#{id} and b.companycode=#{id};
+	</select>
+	
+	<select id="selectCompanyOrg" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			orguuid, division, jobtitle, name, jobtitle, address_line1, address_line2, townorcity, postcode, country, tel, email
+		FROM 
+			address a, companyorganization b
+		WHERE
+			a.assignuuid=b.companycode and b.orguuid=#{id};
 	</select>
 	<!-- 
 	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">

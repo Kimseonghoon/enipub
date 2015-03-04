@@ -13,9 +13,16 @@ public class GeneralInfoServiceImpl implements iGeneralInfoService{
 		this.generalInfoDao = generalInfoDao;
 	}
 	@Override
-	public List<?> selectCompanyData(Map<String, Object> paraMap) {
-		System.out.println(generalInfoDao.selectCompanyData(paraMap));
+	public List<?> selectCompanyData(Map<String, Object> paraMap) {		
 		return generalInfoDao.selectCompanyData(paraMap);
+	}
+	@Override
+	public List<?> selectCompanyOrg(Map<String, Object> paraMap) {		
+		return generalInfoDao.selectCompanyOrg(paraMap);
+	}
+	@Override
+	public List<?> selectCompanyOrgTable(Map<String, Object> paraMap) {
+		return generalInfoDao.selectCompanyOrgTable(paraMap);
 	}
 
 }

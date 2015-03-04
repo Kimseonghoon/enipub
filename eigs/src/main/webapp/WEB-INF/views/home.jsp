@@ -148,6 +148,30 @@ hr {
 	font-weight:bold;
 	color:#FFF !important;
 }
+#DataTable thead {
+	background:#EEE;
+}
+
+#DataTable thead th {
+  text-align: center;
+  font-weight: normal;
+}
+
+#DataTable tbody tr.selRow {
+	background: #5786D6;
+	color:white;	
+}
+
+#DataTable tbody tr:hover {
+	background: #5786D6;
+	color:white;	
+}
+
+#DataTable tbody td {
+  text-align: center;
+}
+
+
 
 #dg-row { border-top:1px solid #999;}
 #dg-row > div {	border-bottom:1px solid #999; }
@@ -166,62 +190,39 @@ hr {
 			  	<a href="#">일반정보</a>
 			    <ul class="list-unstyled">
 			    	<li id="general/companyData">　·　Company Data</li>
-			    	<li id="general/companyOrg">　·　Company Organization</li>
-			    	<li>　·　Company Structure</li>
-			    	<li>　·　Company Finance</li>			      		
+			    	<li id="general/companyOrg" class="DataTable">　·　Company Organization</li>
+			    	<li id="general/companyStr">　·　Company Structure</li>
+			    	<li id="general/companyFinance">　·　Company Finance</li>			      		
 			    </ul>
 		      </li>			      	
 		      
 		      <li>
 		      	<a href="#">품질활동</a>
 		      	<ul class="list-unstyled">
-			    	<li>　·　Company Inno＆Improve</li>
-			    	<li>　·　Company Quality</li>
-			    	<li>　·　Company HSE Statistic</li>
-			    	<li>　·　Company Skil＆TrainG</li>			      		
-			    	<li>　·　Company HR</li>
+			    	<li id="quality/companyInno">　·　Company Inno＆Improve</li>
+			    	<li id="quality/companyQuality">　·　Company Quality</li>
+			    	<li id="quality/companyHSE">　·　Company HSE Statistic</li>
+			    	<li id="quality/companySkill">　·　Company Skill＆TrainG</li>			      		
+			    	<li id="quality/companyHR">　·　Company HR</li>
 			    </ul>
 		      </li>
 		      <li>
 		      	<a href="#">제품정보</a>
 		      	<ul class="list-unstyled">
-			    	<li>　·　Company Supply History</li>
-			    	<li>　·　Company Product＆Services</li> 
+			    	<li id="product/companySupply">　·　Company Supply History</li>
+			    	<li id="product/companyProduct">　·　Company Product＆Services</li> 
 			    </ul>
 		      </li>
 		      <li>
 		      	<a href="#">Data Import</a>
 		      	<ul class="list-unstyled">
+		      		<li id="import/dataImport">　·　Company Data Import</li>
 			    </ul>
 		      </li>
 		    </ul>
-		</div> 
-		
-		<div id="r-pane" class="col-md-9 col-xs-9" style="">
 		</div>
-	
-	</div>
 
-	<div class="container"
-		style="position: fixed; right: 0; left: 0; bottom: 0px; height: 20px;">
-		<div class="row responsive-utilities-test visible-on">
-			<div class="col-xs-6 col-sm-3">
-				<span class="hidden-xs">매우 작은 기기</span> <span class="visible-xs">✔
-					매우 작은 기기에서 <strong>보임</strong></span>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<span class="hidden-sm">작은 기기</span> <span class="visible-sm">✔
-					작은 기기에서 <strong>보임</strong></span>
-			</div>
-			<div class="clearfix visible-xs"></div>
-			<div class="col-xs-6 col-sm-3">
-				<span class="hidden-md">중간 기기</span> <span class="visible-md">✔
-					중간 기기에서 <strong>보임</strong></span>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<span class="hidden-lg">큰 기기</span> <span class="visible-lg">✔
-					큰 기기에서 <strong>보임</strong></span>
-			</div>
+		<div id="r-pane" class="col-md-9 col-xs-9" style="">
 		</div>
 	</div>
 	<!-- <div id="log" style="position: fixed; height: 100px; right: 0; left: 0; bottom: 0; border: 1px dashed black;"></div> -->
@@ -229,66 +230,187 @@ hr {
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
-
+<Script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></Script>
+<Script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></Script>
 <script type="text/javascript">	
 // 임시 ID
 var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
-
+var dtable;
 $(document).ready(function() {
-	$('#nav-sidebar li ul li').on('click', function() {
-	    $(this).parent().parent().parent().find('.active').removeClass('active');
-	    $(this).addClass('active');
-	    
-	    Data.form($(this).attr("id"));			    
-	});
+	SideBar.addEvent();	
 	
-	$('#nav-sidebar li ul li:first').click();
+	$('#nav-sidebar li ul li:first').next().click();
 });
 
-var Data = {
-	form : function(viewName) {
-		$("#r-pane").load("/eigs/getView.do", {"viewName":viewName}, function() {		
-			var request = $.ajax({
-				url : "/eigs/getData.do",
-				type : "POST",
-				data : {
-					companyId : companyId,
-					viewName : viewName
-				},
-				dataType : "json"
-			});
+var SideBar = {
+	addEvent: function() {
+		$('#nav-sidebar li ul li').on('click', function() {
+			var $selMenu = $(this);
+			
+			//좌측 패널 초기화.
+			$("#r-pane").children().detach();
+			
+			$("#r-pane").hide("fade", 100, function() {		
+				// 좌측 메뉴 active 클래스 주입
+				$selMenu.parent().parent().parent().find('.active').removeClass('active');
+				$selMenu.addClass('active');
+			    
+			    // DataTable 클래스가 있으면 Table로 부터 시작되는 페이지가 활성화.
+				if($selMenu.hasClass("DataTable")) {
+					DataTable.loadPage(companyId, $selMenu.attr("id"));
+				} else {
+				    DataForm.loadPage(companyId, $selMenu.attr("id"));
+				}
+			});		    
+		});
+	}	
+};
 
-			request.done(function(result) {
-				Data.input(result);
-			});
-
-			request.fail(function(jqXHR, textStatus) {
-				alert("Request failed: " + jqXHR.status);
-			});
+var DataTable = {
+	loadPage: function(id, viewName) {
+		$("<div>").load("/eigs/getTableView.do", {"viewName":viewName}, function() {
+			$("#r-pane").append($(this).html());
+			DataTable.getData(id, viewName);
 		});
 	},
-		
-	input : function(result) {
-		$(".value input").each(function() {
-			$id = $(this).parent().parent();
-			$input = $(this);
+	getData: function(id, viewName) {
+		var request = $.ajax({
+			url : "/eigs/getData.do",
+			type : "POST",
+			data : {
+				id : id,
+				viewName : viewName
+			},
+			dataType : "json"
+		});
 
-			// ajax로 부터 return된 json이 null이 아닌경우..
-			if(result[0] != null) {
-				$.each(result[0], function(k, v) {								
-					if ($id.attr("id") == k) {
-						$input.val(v);
+		request.done(function(result) {
+			// 테이블의 헤더 생성.
+			var titleSet = [];
+			
+			$.each(result[0], function(k, v) {
+				titleSet.push({						
+					title: k.toUpperCase()
+				});	
+			});			
+			
+			// 테이블의 데이터 생성.
+			var dataSet = [];
+			
+			for(var i=0; i < result.length; i++) {
+				var tmpDataSet = [];
+				$.each(result[i], function(k, v) {
+					tmpDataSet.push(v);
+				});			
+				dataSet.push(tmpDataSet);
+			}
+						
+							
+			// 테이블에 주입.
+			dtable = $("#DataTable").dataTable({					
+				"searching":false,
+				"paginate":false,
+				"autoWidth":false,
+				"data": dataSet,
+				"columns": titleSet
+			});
+
+			// 컬럼중에서 uuid라는 키워드가 들어간 컬럼을 숨긴다.
+			var hiddenColumn;
+			$.each(titleSet, function(k, v) {
+				if((v.title).indexOf("UUID")!=-1) {
+					dtable.fnSetColumnVis(k, false);
+					hiddenColumn = k;
+				}
+			});
+						
+			// 테이블 상단의 서치박스 위치..
+			$("#DataTable > thead").attr("align","center");
+			$(".dataTables_filter").css("float","right");
+			$(".dataTables_filter > label > input").css("margin-left","8px");
+			
+			// 슬라이드 애니메이션.
+			$("#r-pane").show("slide", {direction:"right"}, 400);		
+			
+			//alert(dtable.fnGetData(hiddenColumn));
+			
+			// 이벤트 추가.
+			DataTable.addEvent();
+		}); 
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + jqXHR.status);
+		});
+	},
+	addEvent: function() {
+		$("#DataTable tbody tr").click(function() {		
+			
+			$("#DataTable tbody tr").not(this).removeClass("selRow");
+			$(this).addClass("selRow");
+			
+			$("#r-pane .data-form").detach();
+			
+			DataForm.loadPage("73a49ab1-a326-4511-b562-4c1df1b9e0c7","general/companyOrg");			 
+		});
+	}
+};
+
+var DataForm = {
+	loadPage: function(id, viewName) {
+		$("<div>").load("/eigs/getFormView.do", {"viewName":viewName}, function() {
+			$("#r-pane").append($(this).html());
+			DataForm.getData(id, viewName);
+		});
+	},
+	getData: function(id, viewName) {
+		$("#r-pane").append($(this).html());
+		var request = $.ajax({
+			url : "/eigs/getData.do",
+			type : "POST", 
+			data : {
+				id : id,
+				viewName : viewName
+			},
+			dataType : "json"
+		});
+
+		request.done(function(result) {		
+			console.log(JSON.stringify(result));
+			for(var i=0; i < result.length; i++) {
+				$(".value input").each(function() {
+					$id = $(this).parent().parent();
+					$input = $(this);
+
+					// ajax로 부터 return된 json이 null이 아닌경우..
+					if(result[i] != null) {
+						$.each(result[i], function(k, v) {								
+							if ($id.attr("id") == k) {
+								$input.val(v);
+							}
+						});	
+					}
+					
+					if ($(this).val() == "") {
+						$(this).attr("placeholder",	"\"" + $(this).parent().prev().html()+ "\" required");
+						$(this).parent().addClass("has-error");
 					}
 				});	
 			}
 			
-			if ($(this).val() == "") {
-				$(this).attr("placeholder",	"\"" + $(this).parent().prev().html()+ "\" required");
-				$(this).parent().addClass("has-error");
-			}
+			$("#r-pane").show("slide", {direction:"right"}, 400);
+			
+			DataForm.addEvent();
 		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + jqXHR.status);
+		});
+	},
+	addEvent: function(type) {
+		
 	}
 };
 </script>
