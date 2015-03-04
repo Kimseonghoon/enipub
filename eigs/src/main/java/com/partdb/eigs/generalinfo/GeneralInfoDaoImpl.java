@@ -18,4 +18,16 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 		return tmpTableList;
 	}
 
+	@Override
+	public List<?> selectCompanyOrg(Map<String, Object> paraMap) {
+		List<HashMap<String, Object>> tmpTableList = new ArrayList<HashMap<String, Object>>();
+		tmpTableList = getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyOrg", paraMap);
+		return tmpTableList;
+	}
+
+	@Override
+	public List<?> selectCompanyOrgTable(Map<String, Object> paraMap) {
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyOrgTable", paraMap);
+	}
+
 }

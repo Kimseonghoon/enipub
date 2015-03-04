@@ -46,26 +46,33 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/getView.do")
-	public String views(@RequestParam Map<String, Object> paraMap) {
-		//System.out.println("main/content/"+paraMap.get("viewName"));
-		
+	@RequestMapping(value="/getFormView.do")
+	public String formviews(@RequestParam Map<String, Object> paraMap) {		
 		String returnString ="";	
 		
 		if(paraMap.get("viewName").equals(null)) {
 			returnString = "";
-		} else {
-			returnString = "main/content/"+paraMap.get("viewName");
+		} else {			
+			returnString = "main/content/"+paraMap.get("viewName");			
 		}
+		return returnString;		
+	}
+	
+	@RequestMapping(value="/getTableView.do")
+	public String tableviews(@RequestParam Map<String, Object> paraMap) {		
+		String returnString ="";	
 		
-		return returnString;
-		
+		if(paraMap.get("viewName").equals(null)) {
+			returnString = "";
+		} else {			
+			returnString = "main/content/"+paraMap.get("viewName")+"Table";			
+		}
+		return returnString;		
 	}
 	
 	@RequestMapping(value="/getData.do")
 	public @ResponseBody
-	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {
-		System.out.println(paraMap);
+	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {		
 		List<?> returnValue = new ArrayList<HashMap<String,Object>>();
 				
 		String viewName = paraMap.get("viewName").toString();
@@ -74,11 +81,12 @@ public class HomeController {
 		case "general/companyData":
 			returnValue = myGeneralInfoService.selectCompanyData(paraMap);
 			break;
-
+		case "general/companyOrg":
+			returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);			
+			break;
 		default:
 			break;
 		}
-		
 		return returnValue;
 	}
 	
