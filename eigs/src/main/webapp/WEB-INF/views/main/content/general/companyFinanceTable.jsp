@@ -6,13 +6,18 @@
 	
 	<div class="content" style="height:100%;">
 		<table id="DataTable" class="table table-bordered table-hover" cellspacing="0" style="cursor:pointer;">
-			<thead>
+			<!-- <thead>
 				<tr>
 					<th>회계년도</th>
 					<th>기준통화</th>
 					<th>마감년도</th>														
 				</tr>
-			</thead>
+			</thead> -->
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#DataTable > tbody > tr").first().click();	
+});
+</script>

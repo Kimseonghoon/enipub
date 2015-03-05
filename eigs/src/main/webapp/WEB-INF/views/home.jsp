@@ -192,7 +192,7 @@ hr {
 			    	<li id="general/companyData">　·　Company Data</li>
 			    	<li id="general/companyOrg" class="DataTable">　·　Company Organization</li>
 			    	<li id="general/companyStr">　·　Company Structure</li>
-			    	<li id="general/companyFinance" class="DataTable">　·　Company Finance</li>			      		
+			    	<li id="general/companyFinance" class="DataTable selectedItem">　·　Company Finance</li>			      		
 			    </ul>
 		      </li>			      	
 		      
@@ -341,8 +341,6 @@ var DataTable = {
 					});
 				}
 			});
-
-			
 						
 			// 테이블 상단의 서치박스 위치..
 			$("#DataTable > thead").attr("align","center");
@@ -350,10 +348,11 @@ var DataTable = {
 			$(".dataTables_filter > label > input").css("margin-left","8px");
 			
 			// 슬라이드 애니메이션.
-			$("#r-pane").show("slide", {direction:"right"}, 400);		
-			
-			//alert(dtable.fnGetData(hiddenColumn));
-			
+			$("#r-pane").show("slide", {direction:"right"}, 400, function() {				
+				if($("#nav-sidebar .active").hasClass("selectedItem")) {
+					$("#DataTable > tbody > tr").first().click();		
+				}
+			});
 		}); 
 
 		request.fail(function(jqXHR, textStatus) {
@@ -402,10 +401,12 @@ var DataForm = {
 						$(this).attr("placeholder",	"\"" + $(this).parent().prev().html()+ "\" required");
 						$(this).parent().addClass("has-error");
 					}
-				});	
+				});
 			}
 			
-			$("#r-pane").show("slide", {direction:"right"}, 400);
+			$("#r-pane").show("slide", {direction:"right"}, 400, function() {
+
+			});
 						
 		});
 
