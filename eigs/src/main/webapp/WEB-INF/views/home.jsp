@@ -192,7 +192,7 @@ hr {
 			    	<li id="general/companyData">　·　Company Data</li>
 			    	<li id="general/companyOrg" class="DataTable">　·　Company Organization</li>
 			    	<li id="general/companyStr">　·　Company Structure</li>
-			    	<li id="general/companyFinance">　·　Company Finance</li>			      		
+			    	<li id="general/companyFinance" class="DataTable">　·　Company Finance</li>			      		
 			    </ul>
 		      </li>			      	
 		      
@@ -238,11 +238,11 @@ hr {
 <script type="text/javascript">	
 // 임시 ID
 var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
-var dtable;
+
 $(document).ready(function() {
 	SideBar.addEvent();	
 	
-	$('#nav-sidebar li ul li:first').next().click();
+	$('#nav-sidebar li ul li:first').next().next().next().click();
 });
 
 var SideBar = {
@@ -260,9 +260,9 @@ var SideBar = {
 			    
 			    // DataTable 클래스가 있으면 Table로 부터 시작되는 페이지가 활성화.
 				if($selMenu.hasClass("DataTable")) {
-					DataTable.loadPage(companyId, $selMenu.attr("id"));
+					DataTable.loadPage(companyId, $selMenu.attr("id"), "DataTable");
 				} else {
-				    DataForm.loadPage(companyId, $selMenu.attr("id"));
+				    DataForm.loadPage(companyId, $selMenu.attr("id"), "DataForm"); 
 				}
 			});		    
 		});
@@ -270,19 +270,20 @@ var SideBar = {
 };
 
 var DataTable = {
-	loadPage: function(id, viewName) {
-		$("<div>").load("/eigs/getTableView.do", {"viewName":viewName}, function() {
+	loadPage: function(id, viewName, type) {
+		$("<div>").load("/eigs/getView.do", {"viewName":viewName, "type": type}, function() {
 			$("#r-pane").append($(this).html());
-			DataTable.getData(id, viewName);
+			DataTable.getData(id, viewName, type);
 		});
 	},
-	getData: function(id, viewName) {
+	getData: function(id, viewName, type) {
 		var request = $.ajax({
 			url : "/eigs/getData.do",
 			type : "POST",
 			data : {
 				id : id,
-				viewName : viewName
+				viewName : viewName,
+				type : type
 			},
 			dataType : "json"
 		});
@@ -307,25 +308,41 @@ var DataTable = {
 				});			
 				dataSet.push(tmpDataSet);
 			}
-						
+			
+			// 컬럼중에서 uuid라는 키워드가 들어간 컬럼을 숨긴다.
+ 			var hiddenColumn;
+			$.each(titleSet, function(k, v) {
+				if((v.title).indexOf("UUID")!=-1) {
+					hiddenColumn = k;
+				}
+			}); 		
 							
 			// 테이블에 주입.
-			dtable = $("#DataTable").dataTable({					
+			var dtable = $("#DataTable").dataTable({					
 				"searching":false,
 				"paginate":false,
 				"autoWidth":false,
 				"data": dataSet,
-				"columns": titleSet
-			});
-
-			// 컬럼중에서 uuid라는 키워드가 들어간 컬럼을 숨긴다.
-			var hiddenColumn;
-			$.each(titleSet, function(k, v) {
-				if((v.title).indexOf("UUID")!=-1) {
-					dtable.fnSetColumnVis(k, false);
-					hiddenColumn = k;
+				"columns": titleSet, 
+				"columnDefs": 
+			        [{
+			        	"targets": [hiddenColumn],
+			        	"visible": false,
+			        	"searchable" : false
+			        }],
+				"fnRowCallback": function(nRow, aData) {
+					$(nRow).on("click", function() {
+						$("#DataTable tbody tr").not(this).removeClass("selRow");
+						$(this).addClass("selRow");
+						
+						$("#r-pane .data-form").detach();
+						
+						DataForm.loadPage(aData[hiddenColumn], viewName, "DataForm");
+					});
 				}
 			});
+
+			
 						
 			// 테이블 상단의 서치박스 위치..
 			$("#DataTable > thead").attr("align","center");
@@ -337,48 +354,36 @@ var DataTable = {
 			
 			//alert(dtable.fnGetData(hiddenColumn));
 			
-			// 이벤트 추가.
-			DataTable.addEvent();
 		}); 
 
 		request.fail(function(jqXHR, textStatus) {
 			alert("Request failed: " + jqXHR.status);
 		});
-	},
-	addEvent: function() {
-		$("#DataTable tbody tr").click(function() {		
-			
-			$("#DataTable tbody tr").not(this).removeClass("selRow");
-			$(this).addClass("selRow");
-			
-			$("#r-pane .data-form").detach();
-			
-			DataForm.loadPage("73a49ab1-a326-4511-b562-4c1df1b9e0c7","general/companyOrg");			 
-		});
 	}
 };
 
 var DataForm = {
-	loadPage: function(id, viewName) {
-		$("<div>").load("/eigs/getFormView.do", {"viewName":viewName}, function() {
+	loadPage: function(id, viewName, type) {
+		$("<div>").load("/eigs/getView.do", {"viewName":viewName, "type":type}, function() {
 			$("#r-pane").append($(this).html());
-			DataForm.getData(id, viewName);
+			DataForm.getData(id, viewName, type);
 		});
 	},
-	getData: function(id, viewName) {
+	getData: function(id, viewName, type) {
 		$("#r-pane").append($(this).html());
 		var request = $.ajax({
 			url : "/eigs/getData.do",
 			type : "POST", 
 			data : {
 				id : id,
-				viewName : viewName
+				viewName : viewName,
+				type: type
 			},
 			dataType : "json"
 		});
 
-		request.done(function(result) {		
-			console.log(JSON.stringify(result));
+		request.done(function(result) {	
+			
 			for(var i=0; i < result.length; i++) {
 				$(".value input").each(function() {
 					$id = $(this).parent().parent();
@@ -401,16 +406,12 @@ var DataForm = {
 			}
 			
 			$("#r-pane").show("slide", {direction:"right"}, 400);
-			
-			DataForm.addEvent();
+						
 		});
 
 		request.fail(function(jqXHR, textStatus) {
 			alert("Request failed: " + jqXHR.status);
 		});
-	},
-	addEvent: function(type) {
-		
 	}
 };
 </script>

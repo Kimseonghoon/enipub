@@ -46,7 +46,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/getFormView.do")
+	@RequestMapping(value="/getView.do")
 	public String formviews(@RequestParam Map<String, Object> paraMap) {		
 		String returnString ="";	
 		
@@ -55,18 +55,11 @@ public class HomeController {
 		} else {			
 			returnString = "main/content/"+paraMap.get("viewName");			
 		}
-		return returnString;		
-	}
-	
-	@RequestMapping(value="/getTableView.do")
-	public String tableviews(@RequestParam Map<String, Object> paraMap) {		
-		String returnString ="";	
 		
-		if(paraMap.get("viewName").equals(null)) {
-			returnString = "";
-		} else {			
-			returnString = "main/content/"+paraMap.get("viewName")+"Table";			
+		if(paraMap.get("type").equals("DataTable")) {
+			returnString += "Table";
 		}
+		
 		return returnString;		
 	}
 	
@@ -82,7 +75,22 @@ public class HomeController {
 			returnValue = myGeneralInfoService.selectCompanyData(paraMap);
 			break;
 		case "general/companyOrg":
-			returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);			
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myGeneralInfoService.selectCompanyOrg(paraMap);
+			}
+			break;
+		case "general/companyStr":
+			returnValue = myGeneralInfoService.selectCompanyStr(paraMap);
+			System.out.println(returnValue);
+			break;
+		case "general/companyFinance":
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myGeneralInfoService.selectCompanyFinanceTable(paraMap);			
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myGeneralInfoService.selectCompanyFinance(paraMap);
+			}
 			break;
 		default:
 			break;

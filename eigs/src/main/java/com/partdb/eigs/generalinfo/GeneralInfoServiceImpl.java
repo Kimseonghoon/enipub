@@ -24,5 +24,17 @@ public class GeneralInfoServiceImpl implements iGeneralInfoService{
 	public List<?> selectCompanyOrgTable(Map<String, Object> paraMap) {
 		return generalInfoDao.selectCompanyOrgTable(paraMap);
 	}
+	@Override
+	public List<?> selectCompanyStr(Map<String, Object> paraMap) {
+		return generalInfoDao.selectCompanyStr(paraMap);
+	}
+	@Override
+	public List<?> selectCompanyFinanceTable(Map<String, Object> paraMap) {
+		return generalInfoDao.selectCompanyFinanceTable(paraMap);
+	}
+	@Override
+	public List<?> selectCompanyFinance(Map<String, Object> paraMap) {
+		return generalInfoDao.selectCompanyFinance(paraMap);
+	}
 
 }
