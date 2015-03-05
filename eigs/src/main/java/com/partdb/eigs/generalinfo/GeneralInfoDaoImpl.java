@@ -1,7 +1,5 @@
 package com.partdb.eigs.generalinfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,16 +11,12 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 
 	@Override
 	public List<?> selectCompanyData(Map<String, Object> paraMap) {
-		List<HashMap<String, Object>> tmpTableList = new ArrayList<HashMap<String, Object>>();
-		tmpTableList = getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyData", paraMap);
-		return tmpTableList;
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyData", paraMap);
 	}
 
 	@Override
 	public List<?> selectCompanyOrg(Map<String, Object> paraMap) {
-		List<HashMap<String, Object>> tmpTableList = new ArrayList<HashMap<String, Object>>();
-		tmpTableList = getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyOrg", paraMap);
-		return tmpTableList;
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyOrg", paraMap);
 	}
 
 	@Override
@@ -30,4 +24,19 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyOrgTable", paraMap);
 	}
 
+	@Override
+	public List<?> selectCompanyStr(Map<String, Object> paraMap) {
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyStr", paraMap);
+	}
+
+	@Override
+	public List<?> selectCompanyFinanceTable(Map<String, Object> paraMap) {
+		System.out.println(getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap));
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap);
+	}
+
+	@Override
+	public List<?> selectCompanyFinance(Map<String, Object> paraMap) {
+		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinance", paraMap);
+	}
 }

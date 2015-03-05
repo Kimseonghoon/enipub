@@ -1,5 +1,6 @@
 package com.partdb.eigs;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,8 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.partdb.eigs.generalinfo.iGeneralInfoService;
+import com.partdb.eigs.dataImport.Import;
 
 /**
  * Handles requests for the application home page.
@@ -32,7 +36,6 @@ public class HomeController {
 	
 	@Autowired
 	private iGeneralInfoService myGeneralInfoService;
-		
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -46,7 +49,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/getFormView.do")
+	@RequestMapping(value="/getView.do")
 	public String formviews(@RequestParam Map<String, Object> paraMap) {		
 		String returnString ="";	
 		
@@ -55,18 +58,11 @@ public class HomeController {
 		} else {			
 			returnString = "main/content/"+paraMap.get("viewName");			
 		}
-		return returnString;		
-	}
-	
-	@RequestMapping(value="/getTableView.do")
-	public String tableviews(@RequestParam Map<String, Object> paraMap) {		
-		String returnString ="";	
 		
-		if(paraMap.get("viewName").equals(null)) {
-			returnString = "";
-		} else {			
-			returnString = "main/content/"+paraMap.get("viewName")+"Table";			
-		}
+		if(paraMap.get("type").equals("DataTable")) {
+			returnString += "Table";
+		}		
+		System.out.println(returnString);
 		return returnString;		
 	}
 	
@@ -74,7 +70,7 @@ public class HomeController {
 	public @ResponseBody
 	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {		
 		List<?> returnValue = new ArrayList<HashMap<String,Object>>();
-				
+		
 		String viewName = paraMap.get("viewName").toString();
 		
 		switch (viewName) {
@@ -82,12 +78,40 @@ public class HomeController {
 			returnValue = myGeneralInfoService.selectCompanyData(paraMap);
 			break;
 		case "general/companyOrg":
-			returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myGeneralInfoService.selectCompanyOrg(paraMap);
+			}
+			break;
+		case "general/companyStr":
+			returnValue = myGeneralInfoService.selectCompanyStr(paraMap);
+			break;
+		case "general/companyFinance":
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myGeneralInfoService.selectCompanyFinanceTable(paraMap);			
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myGeneralInfoService.selectCompanyFinance(paraMap);
+			}
 			break;
 		default:
 			break;
 		}
+		
+		System.out.println(returnValue);
 		return returnValue;
 	}
 	
+	@RequestMapping(value="/dataImport.do")
+	public @ResponseBody
+	void dataImport(@RequestParam Map<String, Object> paraMap, HttpServletRequest request, HttpServletResponse response) {		
+		try {		
+			Import dataImport = new Import();	
+			dataImport.callImport(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

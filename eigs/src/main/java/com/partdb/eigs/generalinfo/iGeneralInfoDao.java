@@ -9,4 +9,10 @@ public interface iGeneralInfoDao {
 	public List<?> selectCompanyOrg(Map<String, Object> paraMap);
 
 	public List<?> selectCompanyOrgTable(Map<String, Object> paraMap);
+
+	public List<?> selectCompanyStr(Map<String, Object> paraMap);
+
+	public List<?> selectCompanyFinanceTable(Map<String, Object> paraMap);
+
+	public List<?> selectCompanyFinance(Map<String, Object> paraMap);
 }
