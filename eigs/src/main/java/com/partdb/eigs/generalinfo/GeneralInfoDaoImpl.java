@@ -31,6 +31,7 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 
 	@Override
 	public List<?> selectCompanyFinanceTable(Map<String, Object> paraMap) {
+		System.out.println(getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap));
 		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap);
 	}
 

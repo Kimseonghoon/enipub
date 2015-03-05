@@ -235,6 +235,8 @@ hr {
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 <Script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></Script>
 <Script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></Script>
+
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">	
 // 임시 ID
 var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
@@ -243,6 +245,8 @@ $(document).ready(function() {
 	SideBar.addEvent();	
 	
 	$('#nav-sidebar li ul li:first').next().next().next().click();
+	
+	
 });
 
 var SideBar = {
