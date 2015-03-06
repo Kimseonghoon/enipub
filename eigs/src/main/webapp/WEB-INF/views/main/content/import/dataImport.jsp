@@ -20,6 +20,10 @@ $(function(){
  });
 
 </script>
+
+<p class="right_title">
+	<strong>Company Data Import</strong>
+</p>
 <form name="ImportForm" id="ImportForm" method="post" enctype="multipart/form-data" action="/eigs/dataImport.do" style="width: 350px;">
 	<select name="SheetList">
 		<option>All Item</option>

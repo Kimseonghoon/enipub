@@ -244,7 +244,7 @@ var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
 $(document).ready(function() {
 	SideBar.addEvent();	
 	
-	$('#nav-sidebar li ul li:first').next().next().next().click();
+	$('#nav-sidebar li ul li:first').first().click();
 	
 	
 });
