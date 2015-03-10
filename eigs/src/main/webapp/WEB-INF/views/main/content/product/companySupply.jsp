@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="data-form">
 
 <p class="right_title">
 	<strong>Company Supply History Detail</strong>
@@ -95,4 +96,5 @@
 		</div>
 	</div>
 	
+</div>
 </div>

@@ -237,6 +237,7 @@ hr {
 <Script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></Script>
 
 <script src="http://malsup.github.com/jquery.form.js"></script>
+
 <script type="text/javascript">	
 // 임시 ID
 var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
@@ -272,6 +273,7 @@ var SideBar = {
 		});
 	}	
 };
+
 
 var DataTable = {
 	loadPage: function(id, viewName, type) {
@@ -385,8 +387,7 @@ var DataForm = {
 			dataType : "json"
 		});
 
-		request.done(function(result) {	
-			
+		request.done(function(result) {			
 			for(var i=0; i < result.length; i++) {
 				$(".value input").each(function() {
 					$id = $(this).parent().parent();
