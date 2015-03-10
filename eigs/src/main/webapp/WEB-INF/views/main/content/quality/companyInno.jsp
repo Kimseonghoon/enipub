@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="data-form">
 
 <p class="right_title">
-	<strong>Company Data</strong>
+	<strong>Company Inno & Improve</strong>
 </p>
 
 <div id="dg-row" class="row">
@@ -17,7 +18,7 @@
 
 	<div class="col-md-4 col-xs-4">
 		<div id="corporate_rnd">
-			<div class="title"></div>
+			<div class="title">공동 R&D프로그램보유</div>
 
 			<div class="value">
 				<input class="form-control input-sm" style="width: 90%;" type="text" />
@@ -146,4 +147,5 @@
 	</div>
 
 
+</div>
 </div>

@@ -200,17 +200,17 @@ hr {
 		      	<a href="#">품질활동</a>
 		      	<ul class="list-unstyled">
 			    	<li id="quality/companyInno">　·　Company Inno＆Improve</li>
-			    	<li id="quality/companyQuality">　·　Company Quality</li>
-			    	<li id="quality/companyHSE">　·　Company HSE Statistic</li>
+			    	<li id="quality/companyQuality" class="DataTable">　·　Company Quality</li>
+			    	<li id="quality/companyHSE" class="DataTable">　·　Company HSE Statistic</li>
 			    	<li id="quality/companySkill">　·　Company Skill＆TrainG</li>			      		
-			    	<li id="quality/companyHR">　·　Company HR</li>
+			    	<li id="quality/companyHR" class="DataTable">　·　Company HR</li>
 			    </ul>
 		      </li>
 		      <li>
 		      	<a href="#">제품정보</a>
 		      	<ul class="list-unstyled">
-			    	<li id="product/companySupply">　·　Company Supply History</li>
-			    	<li id="product/companyProduct">　·　Company Product＆Services</li> 
+			    	<li id="product/companySupply" class="DataTable">　·　Company Supply History</li>
+			    	<li id="product/companyProduct" class="DataTable">　·　Company Product＆Services</li> 
 			    </ul>
 		      </li>
 		      <li>
@@ -316,11 +316,12 @@ var DataTable = {
 			// 컬럼중에서 uuid라는 키워드가 들어간 컬럼을 숨긴다.
  			var hiddenColumn;
 			$.each(titleSet, function(k, v) {
-				if((v.title).indexOf("UUID")!=-1) {
+				if((v.title).indexOf("UUID")!=-1 || (v.title).indexOf("PRODUCTCODE")!=-1 || (v.title).indexOf("PROJECTCODE")!=-1 || (v.title).indexOf("EMPNUM")!=-1 ) {
 					hiddenColumn = k;
 				}
 			}); 		
-							
+				
+			console.log(hiddenColumn);
 			// 테이블에 주입.
 			var dtable = $("#DataTable").dataTable({					
 				"searching":false,
@@ -340,7 +341,6 @@ var DataTable = {
 						$(this).addClass("selRow");
 						
 						$("#r-pane .data-form").detach();
-						
 						DataForm.loadPage(aData[hiddenColumn], viewName, "DataForm");
 					});
 				}

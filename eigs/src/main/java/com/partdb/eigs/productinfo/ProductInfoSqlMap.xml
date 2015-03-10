@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductInfoSqlMap" >
+	<!-- select Query -->
+	<select id="selectCompanySupplyTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			projectcode, supplied, industry, project_name			
+		FROM 
+			companysupplyhistory
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanySupply" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			supplied, industry, project_name, primeregion, suppliedfromdate, suppliedtodate, indicativevalue, productdes, award
+		FROM 
+			companysupplyhistory
+		WHERE
+			projectcode=#{id}
+	</select>	
+	
+	<select id="selectCompanyProductTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			productname, manufacturername, productcode
+		FROM 
+			companyproducts
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyProduct" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			productcode, productname, description, manufacturername, supplyarea, contackname, contacktel, standard, certificationnum, expirydate, awrded, patent, capacityfrom, capacityto
+		FROM 
+			companyproducts
+		WHERE
+			productcode=#{id}
+	</select>	
+</mapper>

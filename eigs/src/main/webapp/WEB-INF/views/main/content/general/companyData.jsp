@@ -4,6 +4,12 @@
 		<strong>Company Data</strong>
 	</p>
 	
+	<div class="row">	
+		<div class="col-md-2 col-xs-2 col-md-offset-10 col-xs-offset-10">
+			<button type="button" class="btn btn-primary btn-sm">수정</button>
+			<button type="button" class="btn btn-primary btn-sm">삭제</button>
+		</div>
+	</div>
 	<div id="dg-row" class="row">
 		<!-- row1 --> 
 		<div class="col-md-4 col-xs-4">
@@ -11,7 +17,7 @@
 				<div class="title">회사명 현재</div>
 	
 				<div class="value">
-					<input class="form-control input-sm" style="width: 90%;" type="text" />
+					<input class="form-control input-sm" style="width: 90%;" type="text"  />
 				</div>
 			</div>
 		</div>

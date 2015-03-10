@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.partdb.eigs.generalinfo.iGeneralInfoService;
+import com.partdb.eigs.productinfo.iProductInfoService;
+import com.partdb.eigs.qualityactivity.iQualityActivityService;
 import com.partdb.eigs.dataImport.Import;
 
 /**
@@ -36,6 +38,10 @@ public class HomeController {
 	
 	@Autowired
 	private iGeneralInfoService myGeneralInfoService;
+	@Autowired
+	private iQualityActivityService myQualityActivityService;
+	@Autowired
+	private iProductInfoService myProductInfoService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -68,7 +74,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/getData.do")
 	public @ResponseBody
-	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {		
+	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {	
 		List<?> returnValue = new ArrayList<HashMap<String,Object>>();
 		
 		String viewName = paraMap.get("viewName").toString();
@@ -85,6 +91,7 @@ public class HomeController {
 			}
 			break;
 		case "general/companyStr":
+			System.out.println("**");
 			returnValue = myGeneralInfoService.selectCompanyStr(paraMap);
 			break;
 		case "general/companyFinance":
@@ -94,6 +101,48 @@ public class HomeController {
 				returnValue = myGeneralInfoService.selectCompanyFinance(paraMap);
 			}
 			break;
+		case "quality/companyInno":
+			returnValue = myQualityActivityService.selectInnoImprove(paraMap);
+			break;
+		case "quality/companyQuality":			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myQualityActivityService.selectCompanyQualityTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myQualityActivityService.selectCompanyQuality(paraMap);
+			}
+			
+			break;
+		case "quality/companyHSE":			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myQualityActivityService.selectCompanyHSETable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myQualityActivityService.selectCompanyHSE(paraMap);
+			}
+			
+			break;
+		case "quality/companyHR":			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myQualityActivityService.selectCompanyHRTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myQualityActivityService.selectCompanyHR(paraMap);
+			}			
+			break;			
+		case "product/companySupply":			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myProductInfoService.selectCompanySupplyTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myProductInfoService.selectCompanySupply(paraMap);
+			}			
+			break;
+		case "product/companyProduct":			
+			if(paraMap.get("type").equals("DataTable")) {
+				returnValue = myProductInfoService.selectCompanyProductTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myProductInfoService.selectCompanyProduct(paraMap);
+			}
+			
+			break;
+			
 		default:
 			break;
 		}

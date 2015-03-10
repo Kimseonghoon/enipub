@@ -4,5 +4,7 @@
 <configuration>
 	<mappers>
 		<mapper resource="com/partdb/eigs/generalinfo/GeneralInfoSqlMap.xml" />
+		<mapper resource="com/partdb/eigs/qualityactivity/QualityActivitySqlMap.xml" />
+		<mapper resource="com/partdb/eigs/productinfo/ProductInfoSqlMap.xml" />
 	</mappers>
 </configuration>

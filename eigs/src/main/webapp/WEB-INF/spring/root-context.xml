@@ -25,4 +25,20 @@
 	<bean id="generalInfoDao" class="com.partdb.eigs.generalinfo.GeneralInfoDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>	
+	
+	<bean id="myQualityActivityService" class="com.partdb.eigs.qualityactivity.QualityActivityServiceImpl">
+		<property name="qualityActivityDao" ref="qualityActivityDao"/>
+	</bean>
+	
+	<bean id="qualityActivityDao" class="com.partdb.eigs.qualityactivity.QualityActivityDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
+	
+	<bean id="myProductInfoService" class="com.partdb.eigs.productinfo.ProductInfoServiceImpl">
+		<property name="productInfoDao" ref="productInfoDao"/>
+	</bean>
+	
+	<bean id="productInfoDao" class="com.partdb.eigs.productinfo.ProductInfoDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
 </beans>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <p class="right_title">
-	<strong>Company Data</strong>
+	<strong>Company Product & Services Detail</strong>
 </p>
 
 <div id="dg-row" class="row">	

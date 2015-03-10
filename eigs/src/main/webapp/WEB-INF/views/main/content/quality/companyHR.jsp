@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<div class="data-form">
 <p class="right_title">
-	<strong>Company Data</strong>
+	<strong>Company HR Detail</strong>
 </p>
 
 <div id="dg-row" class="row">
@@ -125,4 +125,5 @@
 		</div>
 	</div>	
 	
+</div>
 </div>

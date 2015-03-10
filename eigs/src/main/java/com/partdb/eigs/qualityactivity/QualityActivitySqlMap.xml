@@ -3,136 +3,68 @@
 
 <mapper namespace="QualityActivitySqlMap" >
 	<!-- select Query -->
-	<select id="selectCompanyData" resultType="java.util.HashMap" parameterType="hashmap">
+	<select id="selectInnoImprove" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT 
 			* 
 		FROM 
-			address a, companybaseinfo b
-		WHERE
-			a.assignuuid=#{id} and b.companycode=#{id}
-	</select>
-	
-	<select id="selectCompanyOrgTable" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT 
-			orguuid, division, title, name, jobtitle
-		FROM 
-			companyorganization
+			companyinnonimprove
 		WHERE
 			companycode=#{id}
-	</select>
+	</select>	
 	
-	<select id="selectCompanyOrg" resultType="java.util.HashMap" parameterType="hashmap">
+	<select id="selectCompanyQualityTable" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT 
-			orguuid, division, title, name, jobtitle
+			qualityuuid, certification, cer_authority, cer_scope, cer_num, expiry_date, awrded, vilocation_law
 		FROM 
-			companyorganization
-		WHERE
-			orguuid=#{id}
-	</select>
-	
-	<select id="selectCompanyStr" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT 
-			*
-		FROM 
-			companystructure
+			companyquality
 		WHERE
 			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyQuality" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			certification, cer_authority, cer_scope, cer_num, expiry_date, awrded, vilocation_law
+		FROM 
+			companyquality
+		WHERE
+			qualityuuid=#{id}
 	</select>
 	
-	<select id="selectCompanyFinanceTable" resultType="java.util.HashMap" parameterType="hashmap">
+	<select id="selectCompanyHSETable" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT 
-			financeuuid, accounts_year, base_currency
+			hseuuid, calendaryear, exposureman_hours, fatalitiesnum, injuriesnum, losttime, danger_occurrences_num, lta_frequency
 		FROM 
-			companyfinance
+			companyhsestatistic
 		WHERE
 			companycode=#{id}
-	</select>
+	</select>	
 	
-	<select id="selectCompanyFinance" resultType="java.util.HashMap" parameterType="hashmap">
+	<select id="selectCompanyHSE" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT 
-			*
+			calendaryear, exposureman_hours, fatalitiesnum, injuriesnum, losttime, danger_occurrences_num, lta_frequency
 		FROM 
-			companyfinance
+			companyhsestatistic
 		WHERE
-			financeuuid=#{id}
+			hseuuid=#{id}
 	</select>
 	
-	<!-- 
-	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT
-			*
-		FROM
-			"rel_product_international"
-		WHERE
-			"product_code"=#{item_id}
-	</select>
-	
-	<select id="selectEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT
-			*
-		FROM
-			"rel_product_org"
-		WHERE
-			"product_code"=#{item_id}
-	</select>
-	
-	<select id="selectStdProductItems" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT
-			* 
-		FROM 
-			"product"
-		WHERE
-			"class_code"=#{item_id}
-	</select>
-	
-	<select id="selectStdEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
+	<select id="selectCompanyHRTable" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT 
-			* 
+			empnum, name, entrydate, department, job_title, education, certi1, certi2, certi3, traing1, traing2, traing3
 		FROM 
-			"rel_product_org"
+			companyhr
 		WHERE
-			"product_code"=#{item_id}
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyHR" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			empnum, name, entrydate, department, job_title, education, certi1, certi2, certi3, traing1, traing2, traing3
+		FROM 
+			companyhr
+		WHERE
+			empnum=#{id}
 	</select>
 	
-	<select id="selectInterSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT 
-			 R.product_code, R.international_code, R.international, O.class_name
-		FROM 
-			"rel_product_international" R			
-			LEFT JOIN 
-				"product" O		
-			ON
-				R.product_code = O.class_code		
-		WHERE
-			R.international_code
-		ILIKE
-			'%' || #{item_id} || '%'
-	</select>
-	
-	<select id="selectDescSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT 
-			* 
-		FROM 
-			"product"
-		WHERE
-			"class_name"
-		ILIKE
-			'%' || #{item_id} || '%'
-	</select>
-	
-	<select id="selectEvaTestSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
-		SELECT 
-			R.product_code, R.organization_code, O.class_name
-		FROM 
-			"rel_product_org" R
-			LEFT JOIN
-				"product" O
-			ON
-				R.product_code = O.class_code
-		WHERE
-			R.organization_code
-		ILIKE
-			'%' || #{item_id} || '%'
-	</select> -->
-	
+		
 </mapper>
