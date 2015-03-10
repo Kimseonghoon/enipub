@@ -36,7 +36,7 @@
   border: 1px solid #b1b1b1;
   overflow: hidden;
   background: #ffffff;
-  /* 아이콘 보기 모드 */
+  /* �꾩씠肄�蹂닿린 紐⑤뱶 */
 }
 .AXGrid .AXgridScrollBody div {
   box-sizing: content-box !important;
@@ -915,7 +915,7 @@
 .AXGrid.AXGridMobile .AXgridScrollBody {
   border: 0px none;
   overflow: visible;
-  /* 모바일 뷰 용 목록 스타일 시트 클래스 */
+  /* 紐⑤컮��酉���紐⑸줉 �ㅽ����쒗듃 �대옒��*/
 }
 .AXGrid.AXGridMobile .AXgridScrollBody .AXGridToolGroup {
   display: block;
