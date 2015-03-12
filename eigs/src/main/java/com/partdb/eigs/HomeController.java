@@ -70,8 +70,8 @@ public class HomeController {
 			returnString = "main/content/"+paraMap.get("viewName");			
 		}
 		
-		if(paraMap.get("type").equals("DataTable")) {
-			returnString += "Table";
+		if(paraMap.get("type").equals("DataGrid")) {
+			returnString += "Grid";
 		}		
 		System.out.println(returnString);
 		return returnString;		
@@ -89,18 +89,17 @@ public class HomeController {
 			returnValue = myGeneralInfoService.selectCompanyData(paraMap);
 			break;
 		case "general/companyOrg":
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myGeneralInfoService.selectCompanyOrgTable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myGeneralInfoService.selectCompanyOrg(paraMap);
 			}
 			break;
 		case "general/companyStr":
-			System.out.println("**");
 			returnValue = myGeneralInfoService.selectCompanyStr(paraMap);
 			break;
 		case "general/companyFinance":
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myGeneralInfoService.selectCompanyFinanceTable(paraMap);			
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myGeneralInfoService.selectCompanyFinance(paraMap);
@@ -110,7 +109,7 @@ public class HomeController {
 			returnValue = myQualityActivityService.selectInnoImprove(paraMap);
 			break;
 		case "quality/companyQuality":			
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myQualityActivityService.selectCompanyQualityTable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myQualityActivityService.selectCompanyQuality(paraMap);
@@ -118,7 +117,7 @@ public class HomeController {
 			
 			break;
 		case "quality/companyHSE":			
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myQualityActivityService.selectCompanyHSETable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myQualityActivityService.selectCompanyHSE(paraMap);
@@ -126,21 +125,21 @@ public class HomeController {
 			
 			break;
 		case "quality/companyHR":			
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myQualityActivityService.selectCompanyHRTable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myQualityActivityService.selectCompanyHR(paraMap);
 			}			
 			break;			
 		case "product/companySupply":			
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myProductInfoService.selectCompanySupplyTable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myProductInfoService.selectCompanySupply(paraMap);
 			}			
 			break;
 		case "product/companyProduct":			
-			if(paraMap.get("type").equals("DataTable")) {
+			if(paraMap.get("type").equals("DataGrid")) {
 				returnValue = myProductInfoService.selectCompanyProductTable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myProductInfoService.selectCompanyProduct(paraMap);

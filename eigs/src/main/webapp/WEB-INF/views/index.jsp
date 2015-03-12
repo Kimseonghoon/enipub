@@ -78,20 +78,21 @@ hr {
 }
 */
 .row [class*="col-"] .title {
-	width: 35%;
+	width: 162px;
 	background: #eee;
 	float: left;
-	padding-right: 10px;
+	padding-right: 0;
 	text-align: right;
 }
 
 .row [class*="col-"] .value {
-	width: 65%;
+	width: 154px;
 	background: #F7F7F7;
 	float: right;
-	padding-left: 10px;
+	padding-left: 0;
 	padding-top: 9px;
 } 
+
 .left_title {
 	height: 32px;
 	border-bottom: 2px solid #BBB;
@@ -155,6 +156,10 @@ hr {
 }
 #dg-row { border-top:1px solid #999;}
 #dg-row > div {	border-bottom:1px solid #999; }
+
+#data-grid {
+	margin-bottom:20px;
+}
 </style>
 </head>
 <body>
@@ -170,9 +175,9 @@ hr {
 			  	<a href="#">일반정보</a>
 			    <ul class="list-unstyled">
 			    	<li id="general/companyData">　·　Company Data</li>
-			    	<li id="general/companyOrg" class="DataTable">　·　Company Organization</li>
+			    	<li id="general/companyOrg" class="DataGrid">　·　Company Organization</li>
 			    	<li id="general/companyStr">　·　Company Structure</li>
-			    	<li id="general/companyFinance" class="DataTable selectedItem">　·　Company Finance</li>			      		
+			    	<li id="general/companyFinance" class="DataGrid selectedItem">　·　Company Finance</li>			      		
 			    </ul>
 		      </li>			      	
 		      
@@ -180,17 +185,17 @@ hr {
 		      	<a href="#">품질활동</a>
 		      	<ul class="list-unstyled">
 			    	<li id="quality/companyInno">　·　Company Inno＆Improve</li>
-			    	<li id="quality/companyQuality" class="DataTable">　·　Company Quality</li>
-			    	<li id="quality/companyHSE" class="DataTable">　·　Company HSE Statistic</li>
+			    	<li id="quality/companyQuality" class="DataGrid">　·　Company Quality</li>
+			    	<li id="quality/companyHSE" class="DataGrid">　·　Company HSE Statistic</li>
 			    	<li id="quality/companySkill">　·　Company Skill＆TrainG</li>			      		
-			    	<li id="quality/companyHR" class="DataTable">　·　Company HR</li>
+			    	<li id="quality/companyHR" class="DataGrid">　·　Company HR</li>
 			    </ul>
 		      </li>
 		      <li>
 		      	<a href="#">제품정보</a>
 		      	<ul class="list-unstyled">
-			    	<li id="product/companySupply" class="DataTable">　·　Company Supply History</li>
-			    	<li id="product/companyProduct" class="DataTable">　·　Company Product＆Services</li> 
+			    	<li id="product/companySupply" class="DataGrid">　·　Company Supply History</li>
+			    	<li id="product/companyProduct" class="DataGrid">　·　Company Product＆Services</li> 
 			    </ul>
 		      </li>
 		      <li>
@@ -202,8 +207,7 @@ hr {
 		    </ul>
 		</div>
 
-		<div id="r-pane" class="col-md-9 col-xs-9" style="">
-		</div>
+		<div id="r-pane" class="col-md-9 col-xs-9" style=""></div>
 	</div>
 	<!-- <div id="log" style="position: fixed; height: 100px; right: 0; left: 0; bottom: 0; border: 1px dashed black;"></div> -->
 </div>
@@ -220,15 +224,9 @@ hr {
 
 <script type="text/javascript">	
 // 임시 ID
-var companyId = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
-
-
-$(document).ready(function() {
-	SideBar.addEvent();	
-	
-	$('#nav-sidebar li ul li:first').next().click();
-
-});
+var COMPANY_ID = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
+var VIEW_NAME  = "";
+var VIEW_TYPE  = "";
 
 var SideBar = {
 	addEvent: function() {
@@ -238,102 +236,43 @@ var SideBar = {
 			//좌측 패널 초기화.
 			$("#r-pane").children().detach();
 			
-			$("#r-pane").hide("fade", 100, function() {		
-				// 좌측 메뉴 active 클래스 주입
-				$selMenu.parent().parent().parent().find('.active').removeClass('active');
-				$selMenu.addClass('active');
-			    
-			    // DataTable 클래스가 있으면 Table로 부터 시작되는 페이지가 활성화.
-				if($selMenu.hasClass("DataTable")) {
-					DataGrid.loadPage(companyId, $selMenu.attr("id"), "DataTable");
-				} else {
-				    DataForm.loadPage(companyId, $selMenu.attr("id"), "DataForm"); 
-				}
-			});		    
+			// 좌측 메뉴 active 클래스 주입
+			$selMenu.parent().parent().parent().find('.active').removeClass('active');
+			$selMenu.addClass('active');
+
+			// *** VIEW_NAME 변경 ***
+			VIEW_NAME = $selMenu.attr("id");			
+
+			if($selMenu.hasClass("DataGrid")) {
+			// *** VIEW_TYPE 변경 ***
+				VIEW_TYPE = "DataGrid";
+			} else {
+			// *** VIEW_TYPE 변경 ***
+				VIEW_TYPE = "DataForm";
+			}
+			LoadView();
+				    
 		});
 	}	
 };
 
-var myGrid = new AXGrid();
-
-var DataGrid = {
-	loadPage: function(id, viewName, type) {
-		$("<div>").load("/eigs/getView.do", {"viewName":viewName, "type":type}, function() {
-			$("#r-pane").append($(this).html());
-		});
-		
-		$("#r-pane").show("slide", {direction:"right"}, 400, function() {
-			DataGrid.pageStart();
-		});
-	},		
-	pageStart: function(){
-		DataGrid.grid.bind();
-	},
-	grid: {
-	    bind: function(){
-	        myGrid.setConfig({
-	            //sort:false, 정렬을 원하지 않을 경우 (tip
-	            fitToWidth:true, // 너비에 자동 맞춤
-	            colHeadAlign: "center", // 헤드의 기본 정렬 값 ( colHeadAlign 을 지정하면 colGroup 에서 정의한 정렬이 무시되고 colHeadAlign : false 이거나 없으면 colGroup 에서 정의한 속성이 적용됩니다.
-	            //colGroup : getColGroup(),
-	            body : {
-	                onclick: function(){
-	                    //trace(myGrid.config.colGroup[this.c]);
-	                    
-	                    //alert(this.list);
-	                    //alert(this.page);
-	                	DataForm.loadPage(companyId, "general/companyOrg", "DataForm");
-	                },
-	                /* ondblclick 선언하면 onclick 이벤트가 0.25 초 지연 발생 됩니다. 주의 하시기 바람니다. */
-/* 	                ondblclick: function(){	                     
-	                    toast.push(Object.toJSON({index:this.index, r:this.r, c:this.c, item:this.item}));
-	                    //alert(this.list);
-	                    //alert(this.page);
-	                    
-	                }, */
-	                addClass: function(){
-	                    // red, green, blue, yellow, white, gray
-	                    if(this.index % 2 == 0){							
-	                        return "white";
-	                    }else{
-	                        return "white";
-	                    }
-	
-	                }
-	            },
-	            page: {
-	                paging: false
-	            }
-	        });
-
-	        //myGrid.setList(list);
-	
-	    },
-	    getExcel: function(type){
-	        var obj = myGrid.getExcelFormat(type);
-	    },
-	    getSelectedItem: function(){
-	        toast.push('콘솔창에 데이터를 출력하였습니다.');
-	    }
-	}
+var LoadView = function() {
+	$("<div>").load("/eigs/getView.do", {"viewName":VIEW_NAME, "type":VIEW_TYPE}, function() {
+		/* $(this).html()에 뷰가 담겨있고 뷰를 초기화하는 소스코드가 있다. */
+		$("#r-pane").append($(this).html());
+	});
 };
 
 var DataForm = {
-	loadPage: function(id, viewName, type) {
-		$("<div>").load("/eigs/getView.do", {"viewName":viewName, "type":type}, function() {
-			$("#r-pane").append($(this).html());
-			DataForm.getData(id, viewName, type);
-		});
-	},
-	getData: function(id, viewName, type) {
+	getData: function() {
 		$("#r-pane").append($(this).html());
 		var request = $.ajax({
 			url : "/eigs/getData.do",
 			type : "POST", 
 			data : {
-				id : id,
-				viewName : viewName,
-				type: type
+				id : COMPANY_ID,
+				viewName : VIEW_NAME,
+				type: VIEW_TYPE
 			},
 			dataType : "json"
 		});
@@ -353,17 +292,13 @@ var DataForm = {
 						});	
 					}
 					
+					// Placeholder 삽입.
 					if ($(this).val() == "") {
 						$(this).attr("placeholder",	"\"" + $(this).parent().prev().html()+ "\" required");
 						$(this).parent().addClass("has-error");
 					}
 				});
-			}
-			
-			$("#r-pane").show("slide", {direction:"right"}, 400, function() {
-
-			});
-						
+			}						
 		});
 
 		request.fail(function(jqXHR, textStatus) {
@@ -371,6 +306,15 @@ var DataForm = {
 		});
 	}
 };
+
+
+
+
+$(document).ready(function() {
+	SideBar.addEvent();		
+	$('#nav-sidebar li ul li:first').first().click();
+
+});
 </script>
 </body>
 </html>
