@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GeneralInfoSqlMap" >
+	<!-- select Query -->
+	<select id="selectCompanyData" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			address a, companybaseinfo b
+		WHERE
+			a.assignuuid=#{id} and b.companycode=#{id}
+	</select>
+		
+	<select id="selectCompanyOrgTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			orguuid, division, title, name, jobtitle
+		FROM 
+			companyorganization
+		WHERE
+			companycode=#{id}			
+	</select>
+	
+	<select id="selectCompanyOrg" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			*
+		FROM 
+			companyorganization a
+			LEFT JOIN 
+				address b
+			ON
+				a.companycode = b.assignuuid 
+		WHERE
+			a.orguuid=#{id}
+	</select>
+	
+	<select id="selectCompanyStr" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			*
+		FROM 
+			companystructure
+		WHERE
+			companycode=#{id}
+	</select>
+	
+	<select id="selectCompanyFinanceTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			financeuuid, accounts_year, base_currency
+		FROM 
+			companyfinance
+		WHERE
+			companycode=#{id}
+	</select>
+	
+	<select id="selectCompanyFinance" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			*
+		FROM 
+			companyfinance
+		WHERE
+			financeuuid=#{id}
+	</select>
+	
+	<update id="updateCompanyData" parameterType="hashmap">
+		UPDATE 
+			companybaseinfo
+		SET 
+			companyname = #{companyname},
+			previousname = #{previousname}, 
+			commonname = #{commonname},
+			homepage = #{homepage},
+			branch = #{branch}
+		WHERE
+			companycode=#{id};
+		
+		UPDATE 
+			address
+		SET 
+			address_line1 = #{address_line1},
+			address_line2= #{address_line2},
+			townorcity= #{townorcity},
+			county= #{county},
+			postcode= #{postcode},
+			country= #{country},
+			tel= #{tel},
+			fax= #{fax},
+			email = #{email}
+		WHERE
+			assignuuid=#{id};
+	</update>
+	
+	<update id="updateCompanyOrg" parameterType="hashmap">
+		UPDATE 
+			companyorganization
+		SET 
+			division = #{division},
+			title = #{title}, 
+			name = #{name},
+			jobtitle = #{jobtitle}
+		WHERE
+			orguuid=#{id}
+	</update>
+	
+	<update id="updateCompanyStr" parameterType="hashmap">
+		UPDATE 
+			companystructure
+		SET 
+			company_type = #{company_type},
+			reg_country = #{reg_country}, 
+			reg_name = #{reg_name},
+			reg_num = #{reg_num},
+			reg_year = #{reg_year}, 
+			vat_reg_num = #{vat_reg_num},
+			stock = #{stock},
+			bankers_name = #{bankers_name}, 
+			bank_add = #{bank_add},
+			auditors_name = #{auditors_name},
+			auditors_add = #{auditors_add}, 
+			parent_company = #{parent_company},
+			subsidiary = #{subsidiary},
+			shareholder_1 = #{shareholder_1}, 
+			shareholder_2 = #{shareholder_2},
+			shareholder_3 = #{shareholder_3},
+			shareholder_4 = #{shareholder_4}, 
+			staff_num = #{staff_num},
+			office_capacity = #{office_capacity},
+			workshop_capacity = #{workshop_capacity}, 
+			yard_capacity = #{yard_capacity},
+			authorisation_num = #{authorisation_num},
+			other_customs_info = #{other_customs_info}, 
+			authorising_country = #{authorising_country},
+			duns_num = #{duns_num}
+		WHERE
+			companycode=#{id}
+	</update>
+	
+	<update id="updateCompanyFinance" parameterType="hashmap">
+		UPDATE 
+			companyfinance
+		SET 
+			createdate = #{createdate},
+			accounts_year = #{accounts_year}, 
+			base_currency = #{base_currency},
+			end_year = #{end_year},
+			end_month = #{end_month}, 
+			state = #{state},
+			submitted_date = #{submitted_date},
+			annual_turnover = #{annual_turnover}, 
+			pre_tax_profit = #{pre_tax_profit},
+			current_assets = #{current_assets},
+			total_stl = #{total_stl}, 
+			total_assets = #{total_assets},
+			tangibleasset = #{tangibleasset},
+			netcurrentasset = #{netcurrentasset}, 
+			netcash = #{netcash},
+			totalnetassets = #{totalnetassets},
+			netprofit = #{netprofit}, 
+			issuedshare_capital = #{issuedshare_capital},
+			authorized_capital = #{authorized_capital},
+			invest_capital = #{invest_capital}
+		WHERE
+			financeuuid=#{id}
+	</update>
+	<!-- 
+	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			*
+		FROM
+			"rel_product_international"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			*
+		FROM
+			"rel_product_org"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectStdProductItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			* 
+		FROM 
+			"product"
+		WHERE
+			"class_code"=#{item_id}
+	</select>
+	
+	<select id="selectStdEvaTestItems" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			"rel_product_org"
+		WHERE
+			"product_code"=#{item_id}
+	</select>
+	
+	<select id="selectInterSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			 R.product_code, R.international_code, R.international, O.class_name
+		FROM 
+			"rel_product_international" R			
+			LEFT JOIN 
+				"product" O		
+			ON
+				R.product_code = O.class_code		
+		WHERE
+			R.international_code
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select>
+	
+	<select id="selectDescSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			"product"
+		WHERE
+			"class_name"
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select>
+	
+	<select id="selectEvaTestSearchResults" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			R.product_code, R.organization_code, O.class_name
+		FROM 
+			"rel_product_org" R
+			LEFT JOIN
+				"product" O
+			ON
+				R.product_code = O.class_code
+		WHERE
+			R.organization_code
+		ILIKE
+			'%' || #{item_id} || '%'
+	</select> -->
+	
+</mapper>

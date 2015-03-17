@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QualityActivitySqlMap" >
+	<!-- select Query -->
+	<select id="selectInnoImprove" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			* 
+		FROM 
+			companyinnonimprove
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyQualityTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			qualityuuid, certification, cer_authority, cer_scope, cer_num, expiry_date, awrded, vilocation_law
+		FROM 
+			companyquality
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyQuality" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			certification, cer_authority, cer_scope, cer_num, expiry_date, awrded, vilocation_law
+		FROM 
+			companyquality
+		WHERE
+			qualityuuid=#{id}
+	</select>
+	
+	<select id="selectCompanyHSETable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			hseuuid, calendaryear, exposureman_hours, fatalitiesnum, injuriesnum, losttime, danger_occurrences_num, lta_frequency
+		FROM 
+			companyhsestatistic
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyHSE" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			calendaryear, exposureman_hours, fatalitiesnum, injuriesnum, losttime, danger_occurrences_num, lta_frequency
+		FROM 
+			companyhsestatistic
+		WHERE
+			hseuuid=#{id}
+	</select>
+	
+	<select id="selectCompanyHRTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			empnum, name, entrydate, department, job_title, education, certi1, certi2, certi3, traing1, traing2, traing3
+		FROM 
+			companyhr
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanyHR" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			empnum, name, entrydate, department, job_title, education, certi1, certi2, certi3, traing1, traing2, traing3
+		FROM 
+			companyhr
+		WHERE
+			empnum=#{id}
+	</select>
+	
+	<select id="selectCompanySkillTable" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			skilluuid, assurance_policy
+		FROM 
+			companyskilltrain
+		WHERE
+			companycode=#{id}
+	</select>	
+	
+	<select id="selectCompanySkill" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+			*
+		FROM 
+			companyskilltrain
+		WHERE
+			skilluuid=#{id}
+	</select>
+		
+	<update id="updateInnoImprove" parameterType="hashmap">
+		UPDATE 
+			companyinnonimprove
+		SET 
+			own_rnd = #{own_rnd},
+			corporate_rnd = #{corporate_rnd}, 
+			annual_rnd_exp = #{annual_rnd_exp},
+			focal_position = #{focal_position},
+			focal_worktime = #{focal_worktime}, 
+			communication = #{communication},
+			improvement_ref = #{improvement_ref},
+			performancesws = #{performancesws}, 
+			performanceswc = #{performanceswc},
+			recent_survey = #{recent_survey},
+			kpi_retention = #{kpi_retention}, 
+			patents2year = #{patents2year},
+			products12mon = #{products12mon},
+			totalnewproduct = #{totalnewproduct}
+		WHERE
+			companycode=#{id}
+	</update>
+	
+	<update id="updateCompanyQuality" parameterType="hashmap">
+		UPDATE 
+			companyquality
+		SET 
+			certification = #{certification},
+			cer_authority = #{cer_authority}, 
+			cer_scope = #{cer_scope},
+			cer_num = #{cer_num},
+			expiry_date = #{expiry_date}, 
+			awrded = #{awrded},
+			vilocation_law = #{vilocation_law}
+		WHERE
+			qualityuuid=#{id}
+	</update>
+	
+	<update id="updateCompanyHSE" parameterType="hashmap">
+		UPDATE 
+			companyhsestatistic
+		SET 
+			calendaryear = #{calendaryear},
+			exposureman_hours = #{exposureman_hours}, 
+			fatalitiesnum = #{fatalitiesnum},
+			injuriesnum = #{injuriesnum},
+			losttime = #{losttime}, 
+			danger_occurrences_num = #{danger_occurrences_num},
+			lta_frequency = #{lta_frequency}
+		WHERE
+			hseuuid=#{id}
+	</update>
+		
+	<update id="updateCompanySkill" parameterType="hashmap">
+		UPDATE 
+			companyskilltrain
+		SET 
+			assurance_policy = #{assurance_policy},
+			job_req = #{job_req}, 
+			com_records = #{com_records},
+			job_training = #{job_training},
+			training_needs = #{training_needs}, 
+			training_record = #{training_record},
+			iip = #{iip},
+			employees_cer = #{employees_cer}, 
+			internal_training = #{internal_training},
+			ojt_time = #{ojt_time}, 
+			awarded = #{awarded}
+		WHERE
+			skilluuid=#{id}
+	</update>	
+	
+	<update id="updateCompanyHR" parameterType="hashmap">
+		UPDATE 
+			companyhr
+		SET 
+			name = #{name},
+			entrydate = #{entrydate}, 
+			department = #{department},
+			job_title = #{job_title},
+			education = #{education}, 
+			certi1 = #{certi1},
+			certi2 = #{certi2},
+			certi3 = #{certi3}, 
+			traing1 = #{traing1},
+			traing2 = #{traing2}, 
+			traing3 = #{traing3}
+		WHERE
+			empnum=#{id}
+	</update>	
+</mapper>

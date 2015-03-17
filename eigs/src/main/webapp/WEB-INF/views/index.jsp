@@ -1,186 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" contentType="text/html; UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Home</title>
+<%@ page session="false" contentType="text/html; UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html><html><head><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>EIGS</title>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href="resources/css/default.css" rel="stylesheet">
 <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- axisj css block -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/axisj/css/cocker/AXJ.min.css" rel="stylesheet">
 <link href="resources/axisj/css/cocker/AXGrid.css" rel="stylesheet">
 
 <style type="text/css">
-html, body{	
-	overflow-x:hidden;
-}
-a:active {
-	outline:none;
-}
-a:focus {
-	outline:none;
-}
-:-ms-input-placehoder.form-control {
-	color: #999;
-}
-
-h4 {
-	margin-top: 25px;
-}
-
-/* .row {
-	margin-bottom: 20px;
-} */
-
-/* #dg-row {
-	margin-top: 10px;
-	margin-bottom: 0;
-}
- */
- 
-/* [class*="col-"] {
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 0;
-	padding-right: 0;
-	border-bottom: 1px solid #ddd;
-} */
-
-hr {
-	margin-top: 40px;
-	margin-bottom: 40px;
-}
-/* 
-.row [class*="col-"] div {
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 0;
-	padding-right: 0;
-	
-	height: 47px;
-}
-
-.row [class*="col-"] div div {
-	font-size: 12px;
-	height: 100%;
-	line-height: 47px;
-	vertical-align: middle;
-}
-*/
-.row [class*="col-"] {
-padding-right:0;
-padding-left:0;
-}
-.row [class*="col-"] .title {
-	width: 124px;
-	background: #eee;
-	float:left;
-	padding-right: 5px;
-	text-align: right;
-	font-size:12px;
-	line-height: 44px;
-	vertical-align: middle;
-}
-
-.row [class*="col-"] .value {
-	/* background: #F7F7F7; */
-	/* width: 134px; */
-	float:left;
-	padding-left: 5px;
-	padding-top: 7px;
-	font-size:12px;
-} 
-.row [class*="col-"] .value input {
-	width:175px;
-}
-.row [class*="col-"] .value label {
-	/* background: #F7F7F7; */
-	/* width: 134px; */
-	float:left;
-	padding-left: 5px;
-	padding-top: 7px;
-	font-size:12px;
-	color:#333;
-} 
-.left_title {
-	height: 32px;
-	border-bottom: 2px solid #BBB;
-	margin-bottom: 20px;
-}
-
-.right_title {
-	height: 32px;
-	margin-left: -14px;
-	margin-right: -14px; 
-	border-bottom: 2px solid #BBB;
-	margin-bottom: 20px;
-}
-
-.right_title strong, .left_title strong {
-	font-weight: normal;
-	font-family: Segoe UI;
-	font-size: 18px;
-}
-
-#nav-sidebar > li > a {
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
-	
-	font-size:13px;
-	color:#333;
-	font-weight:bold;
-}
-#nav-sidebar > li.active > a, #nav-sidebar > li.active > a:focus, #nav-sidebar > li.active > a:hover {
-	color:#FFF;
-	background-color:#5786D6;
-}   
-
-#nav-sidebar > li > ul > li {
-	color:#666;
-	height: 40px; 
-	line-height:30px; 
-	vertical-align:middle;
-	padding:5px;
-	cursor:pointer;	
-	border-bottom:1px solid #aaa;
-	margin-left:45px;
-	font-size:12px;
-}
-
-#nav-sidebar > li {
-	padding-bottom:28px;
-}
-
-#nav-sidebar > li > ul > li:hover {
-	background-color:#5786D6;	
-	font-weight:bold;
-	color:#FFF !important;
-}
-.active {
-	background-color:#5786D6;	
-	font-weight:bold;
-	color:#FFF !important;
-}
-#dg-row { border:1px solid #999;}
-#dg-row > div {	border-bottom:1px solid #CCC; }
-
-#data-grid {
-	width: 930px;
-	margin-left:-14px;
-	margin-bottom:20px;
-}
 </style>
 </head>
 <body>
@@ -230,8 +65,7 @@ padding-left:0;
 
 		<div id="r-pane" class="col-md-9 col-xs-9" style="">
 		
-		</div> 
-		
+		</div>
 	</div>
 	<!-- <div id="log" style="position: fixed; height: 100px; right: 0; left: 0; bottom: 0; border: 1px dashed black;"></div> -->
 </div>
