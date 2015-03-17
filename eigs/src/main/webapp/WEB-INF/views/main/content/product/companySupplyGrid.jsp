@@ -2,19 +2,20 @@
 
 <div class="data-table" style="height:100%;">
 	<p class="right_title">
-		<strong>Company Finance</strong>
+		<strong>Company HR</strong>
 	</p>
 	
 	<div id="data-grid" class="content" style="height:300px;"></div>
 </div>
 
 <script type="text/javascript">
-UUID_NAME = "financeuuid";
+UUID_NAME = "projectcode";
 var getColGroup = function(){
     return [
-        {key : "financeuuid", 	label: "financeuuid", 	align: "center", width:"150", display: false},
-        {key : "accounts_year",  label: "ACCOUNT YEAR",  align: "center", width:"150"},
-        {key : "base_currency", 	label: "BASE CURRENCY", 	align: "center", width:"150"}
+        {key : "projectcode", 	label: "projectcode", 	align: "center", width:"150", display: false},
+        {key : "supplied",  label: "SUPPLIED",  align: "center", width:"150"},
+        {key : "project_name", 		label: "PROJECT NAME", 		align: "center", width:"150"},
+        {key : "industry", 	label: "INDUSTRY", 	align: "center", width:"150"}
     ];
 };
 </script>

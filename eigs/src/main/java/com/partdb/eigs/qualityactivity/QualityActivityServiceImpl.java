@@ -6,6 +6,8 @@ import java.util.Map;
 import com.partdb.eigs.qualityactivity.iQualityActivityService;
 import com.partdb.eigs.qualityactivity.iQualityActivityDao;
 
+import com.partdb.eigs.HelperClass;
+
 public class QualityActivityServiceImpl implements iQualityActivityService{
 	private iQualityActivityDao qualityActivityDao;
 	
@@ -46,5 +48,40 @@ public class QualityActivityServiceImpl implements iQualityActivityService{
 	@Override
 	public List<?> selectCompanyHR(Map<String, Object> paraMap) {
 		return qualityActivityDao.selectCompanyHR(paraMap);
+	}
+
+	@Override
+	public List<?> selectCompanySkill(Map<String, Object> paraMap) {
+		return qualityActivityDao.selectCompanySkill(paraMap);
+	}
+
+	@Override
+	public List<?> selectCompanySkillTable(Map<String, Object> paraMap) {
+		return qualityActivityDao.selectCompanySkillTable(paraMap);
+	}
+
+	@Override
+	public void updateInnoImprove(Map<String, Object> paraMap) {		
+		qualityActivityDao.updateInnoImprove(HelperClass.PARAMCREATE(paraMap));		
+	}
+
+	@Override
+	public void updateCompanyQuality(Map<String, Object> paraMap) {
+		qualityActivityDao.updateCompanyQuality(HelperClass.PARAMCREATE(paraMap));		
+	}
+
+	@Override
+	public void updateCompanyHSE(Map<String, Object> paraMap) {
+		qualityActivityDao.updateCompanyHSE(HelperClass.PARAMCREATE(paraMap));		
+	}
+
+	@Override
+	public void updateCompanySkill(Map<String, Object> paraMap) {
+		qualityActivityDao.updateCompanySkill(HelperClass.PARAMCREATE(paraMap));		
+	}
+
+	@Override
+	public void updateCompanyHR(Map<String, Object> paraMap) {
+		qualityActivityDao.updateCompanyHR(HelperClass.PARAMCREATE(paraMap));		
 	}
 }

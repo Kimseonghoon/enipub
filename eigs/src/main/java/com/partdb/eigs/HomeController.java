@@ -8,11 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ import com.partdb.eigs.generalinfo.iGeneralInfoService;
 import com.partdb.eigs.productinfo.iProductInfoService;
 import com.partdb.eigs.qualityactivity.iQualityActivityService;
 import com.partdb.eigs.dataImport.Import;
+import com.partdb.eigs.generalinfo.GeneralInfoModel;
 
 /**
  * Handles requests for the application home page.
@@ -52,6 +56,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		logger.info("Welcome home! The client locale is {}.", locale);		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);		
@@ -73,7 +78,6 @@ public class HomeController {
 		if(paraMap.get("type").equals("DataGrid")) {
 			returnString += "Grid";
 		}		
-		System.out.println(returnString);
 		return returnString;		
 	}
 	
@@ -82,8 +86,7 @@ public class HomeController {
 	List<?> selectTableData(@RequestParam Map<String, Object> paraMap) {	
 		List<?> returnValue = new ArrayList<HashMap<String,Object>>();
 		
-		String viewName = paraMap.get("viewName").toString();
-		
+		String viewName = paraMap.get("viewName").toString();		
 		switch (viewName) {
 		case "general/companyData":
 			returnValue = myGeneralInfoService.selectCompanyData(paraMap);
@@ -99,7 +102,7 @@ public class HomeController {
 			returnValue = myGeneralInfoService.selectCompanyStr(paraMap);
 			break;
 		case "general/companyFinance":
-			if(paraMap.get("type").equals("DataGrid")) {
+			if(paraMap.get("type").equals("DataGrid")) {				
 				returnValue = myGeneralInfoService.selectCompanyFinanceTable(paraMap);			
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myGeneralInfoService.selectCompanyFinance(paraMap);
@@ -121,8 +124,14 @@ public class HomeController {
 				returnValue = myQualityActivityService.selectCompanyHSETable(paraMap);
 			} else if(paraMap.get("type").equals("DataForm")) {
 				returnValue = myQualityActivityService.selectCompanyHSE(paraMap);
-			}
-			
+			}			
+			break;
+		case "quality/companySkill":			
+			if(paraMap.get("type").equals("DataGrid")) {
+				returnValue = myQualityActivityService.selectCompanySkillTable(paraMap);
+			} else if(paraMap.get("type").equals("DataForm")) {
+				returnValue = myQualityActivityService.selectCompanySkill(paraMap);
+			}			
 			break;
 		case "quality/companyHR":			
 			if(paraMap.get("type").equals("DataGrid")) {
@@ -150,9 +159,54 @@ public class HomeController {
 		default:
 			break;
 		}
-		
-		System.out.println(returnValue);
 		return returnValue;
+	}
+	
+	@RequestMapping(value="/updateData.do")
+	public @ResponseBody
+	void updateTableData(@RequestParam Map<String, Object> paraMap) {
+		String viewName = paraMap.get("viewName").toString();		
+		switch (viewName) {
+		case "general/companyData":
+			myGeneralInfoService.updateCompanyData(paraMap);
+			break;
+		case "general/companyOrg":
+			myGeneralInfoService.updateCompanyOrg(paraMap);			
+			break;
+		case "general/companyStr":
+			myGeneralInfoService.updateCompanyStr(paraMap);
+			break;
+		case "general/companyFinance":
+			myGeneralInfoService.updateCompanyFinance(paraMap);
+			break;
+			
+		case "quality/companyInno":
+			System.out.println(paraMap);
+			myQualityActivityService.updateInnoImprove(paraMap);
+			break;
+		case "quality/companyQuality":			
+			myQualityActivityService.updateCompanyQuality(paraMap);
+			break;
+		case "quality/companyHSE":			
+			myQualityActivityService.updateCompanyHSE(paraMap);
+			break;
+		case "quality/companySkill":			
+			myQualityActivityService.updateCompanySkill(paraMap);
+			break;
+		case "quality/companyHR":			
+			myQualityActivityService.updateCompanyHR(paraMap);
+			break;	
+			
+		case "product/companySupply":			
+			myProductInfoService.updateCompanySupply(paraMap);
+			break;
+		case "product/companyProduct":			
+			myProductInfoService.updateCompanyProduct(paraMap);
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	@RequestMapping(value="/dataImport.do")

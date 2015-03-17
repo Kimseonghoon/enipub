@@ -21,7 +21,7 @@
 <link href="resources/axisj/css/cocker/AXGrid.css" rel="stylesheet">
 
 <style type="text/css">
-html, body{
+html, body{	
 	overflow-x:hidden;
 }
 a:active {
@@ -77,22 +77,41 @@ hr {
 	vertical-align: middle;
 }
 */
+.row [class*="col-"] {
+padding-right:0;
+padding-left:0;
+}
 .row [class*="col-"] .title {
-	width: 162px;
+	width: 124px;
 	background: #eee;
-	float: left;
-	padding-right: 0;
+	float:left;
+	padding-right: 5px;
 	text-align: right;
+	font-size:12px;
+	line-height: 44px;
+	vertical-align: middle;
 }
 
 .row [class*="col-"] .value {
-	width: 154px;
-	background: #F7F7F7;
-	float: right;
-	padding-left: 0;
-	padding-top: 9px;
+	/* background: #F7F7F7; */
+	/* width: 134px; */
+	float:left;
+	padding-left: 5px;
+	padding-top: 7px;
+	font-size:12px;
 } 
-
+.row [class*="col-"] .value input {
+	width:175px;
+}
+.row [class*="col-"] .value label {
+	/* background: #F7F7F7; */
+	/* width: 134px; */
+	float:left;
+	padding-left: 5px;
+	padding-top: 7px;
+	font-size:12px;
+	color:#333;
+} 
 .left_title {
 	height: 32px;
 	border-bottom: 2px solid #BBB;
@@ -154,16 +173,18 @@ hr {
 	font-weight:bold;
 	color:#FFF !important;
 }
-#dg-row { border-top:1px solid #999;}
-#dg-row > div {	border-bottom:1px solid #999; }
+#dg-row { border:1px solid #999;}
+#dg-row > div {	border-bottom:1px solid #CCC; }
 
 #data-grid {
+	width: 930px;
+	margin-left:-14px;
 	margin-bottom:20px;
 }
 </style>
 </head>
 <body>
-<div class="container" style="max-width: none !important;width:1200px;">
+<div class="container" style="max-width: none !important;width:1200px;margin-left:20px;margin-right:0;">
 	<div class="row" style="margin-top:30px;">
 		<div class="col-md-3 col-xs-3" style="padding-right:30px;">
 			<p class="left_title">
@@ -187,7 +208,7 @@ hr {
 			    	<li id="quality/companyInno">　·　Company Inno＆Improve</li>
 			    	<li id="quality/companyQuality" class="DataGrid">　·　Company Quality</li>
 			    	<li id="quality/companyHSE" class="DataGrid">　·　Company HSE Statistic</li>
-			    	<li id="quality/companySkill">　·　Company Skill＆TrainG</li>			      		
+			    	<li id="quality/companySkill" class="DataGrid">　·　Company Skill＆TrainG</li>			      		
 			    	<li id="quality/companyHR" class="DataGrid">　·　Company HR</li>
 			    </ul>
 		      </li>
@@ -207,14 +228,24 @@ hr {
 		    </ul>
 		</div>
 
-		<div id="r-pane" class="col-md-9 col-xs-9" style=""></div>
+		<div id="r-pane" class="col-md-9 col-xs-9" style="">
+		
+		</div> 
+		
 	</div>
 	<!-- <div id="log" style="position: fixed; height: 100px; right: 0; left: 0; bottom: 0; border: 1px dashed black;"></div> -->
 </div>
 
+<div id="loading_container" style="height:100%;width:100%;top:0;position:absolute;background-color:#eee;opacity:0.8;z-index:999;display: none;">
+	<div style="maring: 0;background: white;position:absolute;top:50%;left:50%;margin-right:-50%;transform: translate(-50%,-50%);width:150px;height:50px; border:2px solid #4D6F94; ">
+		<img style="margin:12px 0 0 18px" src="resources/img/ajax-loader.gif"/>
+		<div style="float:right;margin-top:16px;margin-right:22px; font-size: 13px;color:4D6F94">Loading.. </div>
+	</div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+<script src="resources/jquery/ajaxForm/jquery.form.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 
@@ -225,6 +256,8 @@ hr {
 <script type="text/javascript">	
 // 임시 ID
 var COMPANY_ID = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
+var UUID_NAME = "";
+var UUID = "";
 var VIEW_NAME  = "";
 var VIEW_TYPE  = "";
 
@@ -263,57 +296,21 @@ var LoadView = function() {
 	});
 };
 
-var DataForm = {
-	getData: function() {
-		$("#r-pane").append($(this).html());
-		var request = $.ajax({
-			url : "/eigs/getData.do",
-			type : "POST", 
-			data : {
-				id : COMPANY_ID,
-				viewName : VIEW_NAME,
-				type: VIEW_TYPE
-			},
-			dataType : "json"
-		});
-
-		request.done(function(result) {			
-			for(var i=0; i < result.length; i++) {
-				$(".value input").each(function() {
-					$id = $(this).parent().parent();
-					$input = $(this);
-
-					// ajax로 부터 return된 json이 null이 아닌경우..
-					if(result[i] != null) {
-						$.each(result[i], function(k, v) {								
-							if ($id.attr("id") == k) {
-								$input.val(v);
-							}
-						});	
-					}
-					
-					// Placeholder 삽입.
-					if ($(this).val() == "") {
-						$(this).attr("placeholder",	"\"" + $(this).parent().prev().html()+ "\" required");
-						$(this).parent().addClass("has-error");
-					}
-				});
-			}						
-		});
-
-		request.fail(function(jqXHR, textStatus) {
-			alert("Request failed: " + jqXHR.status);
-		});
-	}
-};
-
-
-
 
 $(document).ready(function() {
 	SideBar.addEvent();		
-	$('#nav-sidebar li ul li:first').first().click();
+	$("#nav-sidebar li ul li").first().click();
+});
 
+$(document).ajaxStart(function() {
+	$("#loading_container").show();
+	
+});
+
+$(document).ajaxComplete(function() {
+	setTimeout(function() {
+		$("#loading_container").hide();	
+	}, 500);
 });
 </script>
 </body>

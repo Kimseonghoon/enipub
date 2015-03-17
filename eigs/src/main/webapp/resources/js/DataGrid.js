@@ -18,7 +18,9 @@ var DataGrid = {
 	                	$(".data-form").detach();
 	                	
 	                	VIEW_TYPE = "DataForm";
-	                	LoadView();
+	                	
+	                	UUID = myGrid.getSelectedItem()["item"][UUID_NAME];
+	        			LoadView();
 	                },
 	                /* ondblclick 선언하면 onclick 이벤트가 0.25 초 지연 발생 됩니다. 주의 하시기 바람니다. */
 /* 	                ondblclick: function(){	                     
@@ -68,6 +70,6 @@ var DataGrid = {
 	}
 };
 
-$(document).ready(function() {		
+$(document).ready(function() {	
 	DataGrid.pageStart();		
 });

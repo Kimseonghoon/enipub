@@ -3,8 +3,7 @@ package com.partdb.eigs.productinfo;
 import java.util.List;
 import java.util.Map;
 
-import com.partdb.eigs.generalinfo.iGeneralInfoService;
-import com.partdb.eigs.generalinfo.iGeneralInfoDao;
+import com.partdb.eigs.HelperClass;
 
 public class ProductInfoServiceImpl implements iProductInfoService{
 	private iProductInfoDao productInfoDao;
@@ -27,5 +26,13 @@ public class ProductInfoServiceImpl implements iProductInfoService{
 	@Override
 	public List<?> selectCompanySupply(Map<String, Object> paraMap) {
 		return productInfoDao.selectCompanySupply(paraMap);
+	}
+	@Override
+	public void updateCompanySupply(Map<String, Object> paraMap) {
+		productInfoDao.updateCompanySupply(HelperClass.PARAMCREATE(paraMap));		
+	}
+	@Override
+	public void updateCompanyProduct(Map<String, Object> paraMap) {
+		productInfoDao.updateCompanyProduct(HelperClass.PARAMCREATE(paraMap));			
 	}
 }

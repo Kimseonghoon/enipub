@@ -11,4 +11,8 @@ public interface iProductInfoService {
 	public List<?> selectCompanySupplyTable(Map<String, Object> paraMap);
 
 	public List<?> selectCompanySupply(Map<String, Object> paraMap);
+
+	public void updateCompanySupply(Map<String, Object> paraMap);
+
+	public void updateCompanyProduct(Map<String, Object> paraMap);
 }

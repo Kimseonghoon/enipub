@@ -17,4 +17,18 @@ public interface iQualityActivityService {
 	public List<?> selectCompanyHRTable(Map<String, Object> paraMap);
 
 	public List<?> selectCompanyHR(Map<String, Object> paraMap);
+
+	public List<?> selectCompanySkill(Map<String, Object> paraMap);
+
+	public List<?> selectCompanySkillTable(Map<String, Object> paraMap);
+
+	public void updateInnoImprove(Map<String, Object> paraMap);
+
+	public void updateCompanyQuality(Map<String, Object> paraMap);
+
+	public void updateCompanyHSE(Map<String, Object> paraMap);
+
+	public void updateCompanySkill(Map<String, Object> paraMap);
+
+	public void updateCompanyHR(Map<String, Object> paraMap);
 }

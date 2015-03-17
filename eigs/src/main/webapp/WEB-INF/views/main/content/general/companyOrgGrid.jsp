@@ -9,6 +9,7 @@
 </div>
 
 <script type="text/javascript">
+UUID_NAME = "orguuid";
 var getColGroup = function(){
     return [
         {key : "orguuid", 	label: "orguuid", 	align: "center", width:"150", display: false},

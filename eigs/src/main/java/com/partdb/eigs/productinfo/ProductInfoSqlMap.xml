@@ -38,4 +38,42 @@
 		WHERE
 			productcode=#{id}
 	</select>	
+	
+	<update id="updateCompanySupply" parameterType="hashmap">
+		UPDATE 
+			companysupplyhistory
+		SET 
+			supplied = #{supplied},
+			industry = #{industry}, 
+			project_name = #{project_name},
+			primeregion = #{primeregion},
+			suppliedfromdate = #{suppliedfromdate}, 
+			suppliedtodate = #{suppliedtodate},
+			indicativevalue = #{indicativevalue},
+			productdes = #{productdes}, 
+			award = #{award}
+		WHERE
+			projectcode=#{id}
+	</update>		
+	
+	<update id="updateCompanyProduct" parameterType="hashmap">
+		UPDATE 
+			companyproducts
+		SET 
+			productname = #{productname},
+			description = #{description}, 
+			manufacturername = #{manufacturername},
+			supplyarea = #{supplyarea},
+			contackname = #{contackname}, 
+			contacktel = #{contacktel},
+			standard = #{standard},
+			certificationnum = #{certificationnum}, 
+			expirydate = #{expirydate}, 
+			awrded = #{awrded},
+			patent = #{patent},
+			capacityfrom = #{capacityfrom},
+			capacityto = #{capacityto}
+		WHERE
+			productcode=#{id}
+	</update>	
 </mapper>

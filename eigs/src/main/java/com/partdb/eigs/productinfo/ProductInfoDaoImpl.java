@@ -28,5 +28,14 @@ public class ProductInfoDaoImpl extends SqlSessionDaoSupport implements iProduct
 		return getSqlSession().selectList("ProductInfoSqlMap.selectCompanyProductTable", paraMap);
 	}
 
+	@Override
+	public void updateCompanySupply(Map<String, String> paraMap) {
+		getSqlSession().selectList("ProductInfoSqlMap.updateCompanySupply", paraMap);	}
+
+	@Override
+	public void updateCompanyProduct(Map<String, String> paraMap) {
+		getSqlSession().selectList("ProductInfoSqlMap.updateCompanyProduct", paraMap);
+	}
+
 
 }

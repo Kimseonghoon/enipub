@@ -11,4 +11,8 @@ public interface iProductInfoDao {
 	public List<?> selectCompanyProduct(Map<String, Object> paraMap);
 
 	public List<?> selectCompanyProductTable(Map<String, Object> paraMap);
+
+	public void updateCompanySupply(Map<String, String> paramcreate);
+
+	public void updateCompanyProduct(Map<String, String> paramcreate);
 }
