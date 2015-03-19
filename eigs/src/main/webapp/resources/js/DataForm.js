@@ -144,15 +144,8 @@ var fnCalendar = {
 
 var btnEvent = {
 	updateBtn: function() {
-		$("#updateBtn").on("click", function() {		
-			dialog.push({
-			    body:'<b>Caution</b> Application Call dialog push', top:0, type:'Caution', buttons:[
-			        {buttonValue:'button1', buttonClass:'Red W100', data:'data1'},
-			        {buttonValue:'button2', buttonClass:'Blue', data:'data2'},
-			        {buttonValue:'button3', buttonClass:'Green', data:'data3'}
-			    ]
-			});
-						
+		$("#updateBtn").on("click", function() {
+			
 			var i=0;
 			jsonArr = [];
 			$(".data-form #dg-row > div > div").each(function() {	
@@ -181,7 +174,7 @@ var btnEvent = {
 					tmpId = UUID;
 				}
 			});
-			console.log(JSON.stringify(jsonArr));
+			
 			var request = $.ajax({
 				url : "/eigs/updateData.do",
 				type : "POST",
@@ -202,11 +195,41 @@ var btnEvent = {
 				alert("Request failed: " + textStatus);
 			});
 		});
+	},
+	deleteBtn: function() {
+		$("#deleteBtn").on("click", function() {
+			var tmpId = COMPANY_ID;		
+			$("#r-pane").find("div").each(function() {
+				if($(this).hasClass("data-table")) {
+					tmpId = UUID;
+				}
+			});
+			
+			var request = $.ajax({
+				url : "/eigs/deleteData.do",
+				type : "POST",
+				data : {
+					id : tmpId,
+					viewName : VIEW_NAME,
+					type: VIEW_TYPE
+				},
+				dataType : "html"
+			});
+
+			request.done(function(msg) {
+				$("#nav-sidebar .active").click();
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+				alert("Request failed: " + jqXHR.status);
+			});
+		});
 	}
 };
 
 $(document).ready(function() {
 	fnCalendar.pageStart();	
 	DataForm.getData();	
-	btnEvent.updateBtn();	
+	btnEvent.updateBtn();
+	btnEvent.deleteBtn();
 });

@@ -77,4 +77,29 @@ public class QualityActivityDaoImpl extends SqlSessionDaoSupport implements iQua
 	public void updateCompanyHR(Map<String, String> paraMap) {
 		getSqlSession().selectList("QualityActivitySqlMap.updateCompanyHR", paraMap);
 	}
+
+	@Override
+	public void deleteCompanyInno(Map<String, Object> paraMap) {
+		getSqlSession().selectList("QualityActivitySqlMap.deleteCompanyInno", paraMap);
+	}
+
+	@Override
+	public void deleteCompanyQuality(Map<String, Object> paraMap) {
+		getSqlSession().selectList("QualityActivitySqlMap.deleteCompanyQuality", paraMap);
+	}
+
+	@Override
+	public void deleteCompanyHSE(Map<String, Object> paraMap) {
+		getSqlSession().selectList("QualityActivitySqlMap.deleteCompanyHSE", paraMap);
+	}
+
+	@Override
+	public void deleteCompanySkill(Map<String, Object> paraMap) {
+		getSqlSession().selectList("QualityActivitySqlMap.deleteCompanySkill", paraMap);
+	}
+
+	@Override
+	public void deleteCompanyHR(Map<String, Object> paraMap) {
+		getSqlSession().selectList("QualityActivitySqlMap.deleteCompanyHR", paraMap);
+	}
 }

@@ -161,6 +161,22 @@
 		WHERE
 			financeuuid=#{id}
 	</update>
+	
+	<delete id="deleteCompanyData" parameterType="hashMap">
+		DELETE 
+		FROM
+			companybaseinfo
+		WHERE
+			companycode=#{id}
+	</delete>
+	<delete id="deleteCompanyOrg" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyorganization
+		WHERE
+			orguuid=#{id}
+	</delete>
+	
 	<!-- 
 	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT

@@ -15,4 +15,8 @@ public interface iProductInfoService {
 	public void updateCompanySupply(Map<String, Object> paraMap);
 
 	public void updateCompanyProduct(Map<String, Object> paraMap);
+
+	public void deleteCompanySupply(Map<String, Object> paraMap);
+
+	public void deleteCompanyProduct(Map<String, Object> paraMap);
 }

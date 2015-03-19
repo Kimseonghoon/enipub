@@ -26,7 +26,7 @@
 	
 		<div class="col-md-4 col-xs-4">
 			<div id="corporate_rnd">
-				<div class="title" style="line-height:22px">공동 R&D프로그램보유</div>
+				<div class="title" style="">공동 R&D프로그램보유</div>
 	
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />
@@ -126,7 +126,7 @@
 	
 		<div class="col-md-4 col-xs-4">
 			<div id="patents2year">
-				<div class="title" style="line-height:22px;">최근 2년간 출원된 특허</div>
+				<div class="title" style="">최근 2년간 출원된 특허</div>
 	
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />

@@ -97,7 +97,7 @@
 		</div>
 		<div class="col-md-4 col-xs-4">
 			<div id="internal_training">
-				<div class="title" style="line-height:22px;">직원능력개발 외부인증</div>
+				<div class="title" style="">직원능력개발 외부인증</div>
 	
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />

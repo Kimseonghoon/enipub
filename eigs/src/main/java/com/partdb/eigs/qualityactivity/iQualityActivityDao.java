@@ -31,4 +31,14 @@ public interface iQualityActivityDao {
 	public void updateCompanySkill(Map<String, String> paramcreate);
 
 	public void updateCompanyHR(Map<String, String> paramcreate);
+
+	public void deleteCompanyInno(Map<String, Object> paraMap);
+
+	public void deleteCompanyQuality(Map<String, Object> paraMap);
+
+	public void deleteCompanyHSE(Map<String, Object> paraMap);
+
+	public void deleteCompanySkill(Map<String, Object> paraMap);
+
+	public void deleteCompanyHR(Map<String, Object> paraMap);
 }

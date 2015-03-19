@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.partdb.eigs.qualityactivity.iQualityActivityService;
 import com.partdb.eigs.qualityactivity.iQualityActivityDao;
-
 import com.partdb.eigs.HelperClass;
 
 public class QualityActivityServiceImpl implements iQualityActivityService{
@@ -83,5 +82,30 @@ public class QualityActivityServiceImpl implements iQualityActivityService{
 	@Override
 	public void updateCompanyHR(Map<String, Object> paraMap) {
 		qualityActivityDao.updateCompanyHR(HelperClass.PARAMCREATE(paraMap));		
+	}
+
+	@Override
+	public void deleteCompanyInno(Map<String, Object> paraMap) {
+		qualityActivityDao.deleteCompanyInno(paraMap);		
+	}
+
+	@Override
+	public void deleteCompanyQuality(Map<String, Object> paraMap) {
+		qualityActivityDao.deleteCompanyQuality(paraMap);		
+	}
+
+	@Override
+	public void deleteCompanyHSE(Map<String, Object> paraMap) {
+		qualityActivityDao.deleteCompanyHSE(paraMap);		
+	}
+
+	@Override
+	public void deleteCompanySkill(Map<String, Object> paraMap) {
+		qualityActivityDao.deleteCompanySkill(paraMap);
+	}
+
+	@Override
+	public void deleteCompanyHR(Map<String, Object> paraMap) {
+		qualityActivityDao.deleteCompanyHR(paraMap);
 	}
 }

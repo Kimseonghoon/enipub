@@ -8,7 +8,7 @@
 		<div class="col-md-12 col-xs-12">
 			<div style="float:right;">
 				<button id="updateBtn" style="" type="button" class="btn btn-primary btn-sm">수정</button>
-				<button style="" type="button" class="btn btn-primary btn-sm">삭제</button>
+				<button id="deleteBtn" style="" type="button" class="btn btn-primary btn-sm">삭제</button>
 			</div>
 		</div>
 	</div>

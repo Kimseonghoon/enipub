@@ -31,13 +31,11 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 
 	@Override
 	public List<?> selectCompanyFinanceTable(Map<String, Object> paraMap) {
-		System.out.println(getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap));
 		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinanceTable", paraMap);
 	}
 
 	@Override
 	public List<?> selectCompanyFinance(Map<String, Object> paraMap) {
-		System.out.println(paraMap);
 		return getSqlSession().selectList("GeneralInfoSqlMap.selectCompanyFinance", paraMap);
 	}
 
@@ -61,4 +59,25 @@ public class GeneralInfoDaoImpl extends SqlSessionDaoSupport implements iGeneral
 	public void updateCompanyFinance(Map<String, String> paraMap) {
 		getSqlSession().selectList("GeneralInfoSqlMap.updateCompanyFinance", paraMap);
 	}
+
+	@Override
+	public void deleteCompanyData(Map<String, Object> paraMap) {
+		getSqlSession().delete("GeneralInfoSqlMap.deleteCompanyData", paraMap);
+	}
+
+	@Override
+	public void deleteCompanyOrg(Map<String, Object> paraMap) {
+		getSqlSession().delete("GeneralInfoSqlMap.deleteCompanyOrg", paraMap);
+	}
+	
+	@Override
+	public void deleteCompanyStr(Map<String, Object> paraMap) {
+		getSqlSession().delete("GeneralInfoSqlMap.deleteCompanyStr", paraMap);
+	}
+
+	@Override
+	public void deleteCompanyFinance(Map<String, Object> paraMap) {
+		getSqlSession().delete("GeneralInfoSqlMap.deleteCompanyFinance", paraMap);
+	}
+	
 }

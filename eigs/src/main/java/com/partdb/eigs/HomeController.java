@@ -1,21 +1,21 @@
 package com.partdb.eigs;
 
 import java.io.IOException;
-import java.text.DateFormat;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.partdb.eigs.generalinfo.iGeneralInfoService;
 import com.partdb.eigs.productinfo.iProductInfoService;
 import com.partdb.eigs.qualityactivity.iQualityActivityService;
 import com.partdb.eigs.dataImport.Import;
-import com.partdb.eigs.generalinfo.GeneralInfoModel;
 
 /**
  * Handles requests for the application home page.
@@ -49,19 +49,34 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(Locale locale, Model model) {
-		return "index";
-	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-		logger.info("Welcome home! The client locale is {}.", locale);		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);		
-		String formattedDate = dateFormat.format(date);		
-		model.addAttribute("serverTime", formattedDate );		
+		String user = "postgres";
+		String password = "1234";
+		String driver = "org.postgresql.Driver";
+		String url = "jdbc:postgresql://localhost:5432/EIGS_DB";
+		
+		Connection conn = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select companycode from companybaseinfo";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			model.addAttribute("id", rs.getString("companycode"));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		return "index";
 	}
 	
@@ -181,7 +196,6 @@ public class HomeController {
 			break;
 			
 		case "quality/companyInno":
-			System.out.println(paraMap);
 			myQualityActivityService.updateInnoImprove(paraMap);
 			break;
 		case "quality/companyQuality":			
@@ -207,6 +221,55 @@ public class HomeController {
 		default:
 			break;
 		}
+	}
+	
+	@RequestMapping(value="/deleteData.do")
+	public @ResponseBody
+	int deleteData(@RequestParam Map<String, Object> paraMap) {
+		int returnValue = 0;
+		String viewName = paraMap.get("viewName").toString();
+		
+		switch (viewName) {
+		case "general/companyData":
+			myGeneralInfoService.deleteCompanyData(paraMap);
+			break;
+		case "general/companyOrg":
+			myGeneralInfoService.deleteCompanyOrg(paraMap);
+			break;
+		case "general/companyStr":
+			myGeneralInfoService.deleteCompanyStr(paraMap);
+			break;
+		case "general/companyFinance":
+			myGeneralInfoService.deleteCompanyFinance(paraMap);
+			break;
+			
+		case "quality/companyInno":
+			myQualityActivityService.deleteCompanyInno(paraMap);
+			break;
+		case "quality/companyQuality":
+			myQualityActivityService.deleteCompanyQuality(paraMap);
+			break;
+		case "quality/companyHSE":
+			myQualityActivityService.deleteCompanyHSE(paraMap);
+			break;
+		case "quality/companySkill":
+			myQualityActivityService.deleteCompanySkill(paraMap);
+			break;
+		case "quality/companyHR":
+			myQualityActivityService.deleteCompanyHR(paraMap);
+			break;
+			
+		case "product/companySupply":
+			myProductInfoService.deleteCompanySupply(paraMap);
+			break;
+		case "product/companyProduct":
+			myProductInfoService.deleteCompanyProduct(paraMap);
+			break;
+		default :
+			break;
+		}	
+		
+		return returnValue;
 	}
 	
 	@RequestMapping(value="/dataImport.do")

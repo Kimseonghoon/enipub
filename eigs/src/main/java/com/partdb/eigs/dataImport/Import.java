@@ -362,7 +362,7 @@ public class Import extends HttpServlet {
 		XSSFSheet sheet = TemplateData.getSheet("Company_Organization_ERP");
 		int Rows = sheet.getPhysicalNumberOfRows();
 		
-		for(int rowD = 3; rowD<Rows; rowD++)
+		for(int rowD = 3; rowD<Rows; rowD+=2)
 		{
 			XSSFRow row = sheet.getRow(rowD);
 			
@@ -384,8 +384,7 @@ public class Import extends HttpServlet {
     				Org_ERP_SQL += "'" + parserType(row.getCell(4))+parserType(row.getCell(3)) + "',";
     				Org_ERP_SQL += "'" + parserType(row.getCell(5)) + "',";
     				Org_ERP_SQL += "'" + ItemUuId + "');";            				
-					
-					
+										
 					Address_SQL += " INSERT INTO address ( addresscode, address_line1, address_line2, townorcity, county, postcode, country, tel, fax, email, assignuuid) VALUES (";
 					Address_SQL += "'" + UUID.randomUUID().toString() + "',";
 					Address_SQL += "'" + parserType(row.getCell(6)) + "',";
@@ -405,7 +404,6 @@ public class Import extends HttpServlet {
     					QueryList.add(Address_SQL);
         			}
 				}
-				rowD++;
 			}
 		}
 		

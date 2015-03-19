@@ -15,8 +15,7 @@ var getColGroup = function(){
         {key : "hseuuid", 	label: "hseuuid", 	align: "center", width:"150", display: false},
         {key : "calendaryear",  label: "CALENDAR YEAR",  align: "center", width:"150"},
         {key : "exposureman_hours", 	label: "EXPOSUREMAN HOURS", 	align: "center", width:"150"},
-        {key : "fatalitiesnum", 		label: "FATALITIES NUM", 		align: "center", width:"150"},
-        {key : "expiry_date", 	label: "EXPIRY DATE", 	align: "center", width:"150"}
+        {key : "fatalitiesnum", 		label: "FATALITIES NUM", 		align: "center", width:"150"}        
     ];
 };
 </script>

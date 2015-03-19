@@ -3,36 +3,163 @@
 /*웹폰트*/
 @font-face {
 font-family:"NanumGothic"; 
-src:url('/enipub-etss/resources/font/NanumGothic.eot');
-src:url('/enipub-etss/resources/font/NanumGothic.eot?#iefix') format('embedded-opentype'),
-    url('/enipub-etss/resources/font/NanumGothic.woff') format('woff'),
-    url('/enipub-etss/resources/font/NanumGothic.ttf') format('truetype');
+src:url('/eigs/resources/font/NanumGothic.eot');
+src:url('/eigs/resources/font/NanumGothic.eot?#iefix') format('embedded-opentype'),
+    url('/eigs/resources/font/NanumGothic.woff') format('woff'),
+    url('/eigs/resources/font/NanumGothic.ttf') format('truetype');
 }
 @font-face {
 font-family:"NanumGothicBold"; 
-src:url('/enipub-etss/resources/font/NanumGothicBold.eot');
-src:url('/enipub-etss/resources/font/NanumGothicBold.eot?#iefix') format('embedded-opentype'),
-    url('/enipub-etss/resources/font/NanumGothicBold.woff') format('woff'),
-    url('/enipub-etss/resources/font/NanumGothicBold.ttf') format('truetype');
+src:url('/eigs/resources/font/NanumGothicBold.eot');
+src:url('/eigs/resources/font/NanumGothicBold.eot?#iefix') format('embedded-opentype'),
+    url('/eigs/resources/font/NanumGothicBold.woff') format('woff'),
+    url('/eigs/resources/font/NanumGothicBold.ttf') format('truetype');
 }
 @font-face {
 font-family:"NanumGothicExtraBold"; 
-src:url('/enipub-etss/resources/font/NanumGothicExtraBold.eot');
-src:url('/enipub-etss/resources/font/NanumGothicExtraBold.eot?#iefix') format('embedded-opentype'),
-    url('/enipub-etss/resources/font/NanumGothicExtraBold.woff') format('woff'),
-    url('/enipub-etss/resources/font/NanumGothicExtraBold.ttf') format('truetype');
+src:url('/eigs/resources/font/NanumGothicExtraBold.eot');
+src:url('/eigs/resources/font/NanumGothicExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('/eigs/resources/font/NanumGothicExtraBold.woff') format('woff'),
+    url('/eigs/resources/font/NanumGothicExtraBold.ttf') format('truetype');
 }
 @font-face {
 font-family:"MyriadPro"; 
-src:url('/enipub-etss/resources/font/MyriadPro-Regular.eot');
-src:url('/enipub-etss/resources/font/MyriadPro-Regular.eot?#iefix') format('embedded-opentype'),
-    url('/enipub-etss/resources/font/MyriadPro-Regular.woff') format('woff'),
-    url('/enipub-etss/resources/font/MyriadPro-Regular.ttf') format('truetype');
+src:url('/eigs/resources/font/MyriadPro-Regular.eot');
+src:url('/eigs/resources/font/MyriadPro-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/eigs/resources/font/MyriadPro-Regular.woff') format('woff'),
+    url('/eigs/resources/font/MyriadPro-Regular.ttf') format('truetype');
 }
 @font-face {
 font-family:"Tsddo_M"; 
-src:url('/enipub-etss/resources/font/Tsddo_M.eot');
-src:url('/enipub-etss/resources/font/Tsddo_M.eot?#iefix') format('embedded-opentype'),
-    url('/enipub-etss/resources/font/Tsddo_M.woff') format('woff'),
-    url('/enipub-etss/resources/font/Tsddo_M.ttf') format('truetype');
+src:url('/eigs/resources/font/Tsddo_M.eot');
+src:url('/eigs/resources/font/Tsddo_M.eot?#iefix') format('embedded-opentype'),
+    url('/eigs/resources/font/Tsddo_M.woff') format('woff'),
+    url('/eigs/resources/font/Tsddo_M.ttf') format('truetype');
+}
+
+html, body{	
+	overflow-x:hidden;
+}
+a:active {
+	outline:none;
+}
+a:focus {
+	outline:none;
+}
+:-ms-input-placehoder.form-control {
+	color: #999;
+}
+
+h4 {
+	margin-top: 25px;
+}
+
+hr {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.row [class*="col-"] {
+padding-right:0;
+padding-left:0;
+}
+.row [class*="col-"] .title {
+	width: 124px;
+	background: #eee;
+	float:left;
+	padding-right: 5px;
+	text-align: right;
+	font-size:12px;
+	line-height: 44px;
+	vertical-align: middle;
+}
+
+.row [class*="col-"] .value {
+	/* background: #F7F7F7; */
+	/* width: 134px; */
+	float:left;
+	padding-left: 5px;
+	padding-top: 7px;
+	font-size:12px;
+} 
+.row [class*="col-"] .value input {
+	width:175px;
+}
+.row [class*="col-"] .value label {
+	/* background: #F7F7F7; */
+	/* width: 134px; */
+	float:left;
+	padding-left: 5px;
+	padding-top: 7px;
+	font-size:12px;
+	color:#333;
+} 
+.left_title {
+	height: 32px;
+	border-bottom: 2px solid #BBB;
+	margin-bottom: 20px;
+}
+
+.right_title {
+	height: 32px;
+	margin-left: -14px;
+	margin-right: -14px; 
+	border-bottom: 2px solid #BBB;
+	margin-bottom: 20px;
+}
+
+.right_title strong, .left_title strong {
+	font-weight: normal;
+	font-family: Segoe UI;
+	font-size: 18px;
+}
+
+#nav-sidebar > li > a {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	
+	font-size:13px;
+	color:#333;
+	font-weight:bold;
+}
+#nav-sidebar > li.active > a, #nav-sidebar > li.active > a:focus, #nav-sidebar > li.active > a:hover {
+	color:#FFF;
+	background-color:#5786D6;
+}   
+
+#nav-sidebar > li > ul > li {
+	color:#666;
+	height: 40px; 
+	line-height:30px; 
+	vertical-align:middle;
+	padding:5px;
+	cursor:pointer;	
+	border-bottom:1px solid #aaa;
+	margin-left:45px;
+	font-size:12px;
+}
+
+#nav-sidebar > li {
+	padding-bottom:28px;
+}
+
+#nav-sidebar > li > ul > li:hover {
+	background-color:#5786D6;	
+	font-weight:bold;
+	color:#FFF !important;
+}
+.active {
+	background-color:#5786D6;	
+	font-weight:bold;
+	color:#FFF !important;
+}
+#dg-row { border:1px solid #999;}
+#dg-row > div {	border-bottom:1px solid #CCC; }
+
+#data-grid {
+	width: 930px;
+	margin-left:-14px;
+	margin-bottom:20px;
 }

@@ -35,4 +35,12 @@ public class ProductInfoServiceImpl implements iProductInfoService{
 	public void updateCompanyProduct(Map<String, Object> paraMap) {
 		productInfoDao.updateCompanyProduct(HelperClass.PARAMCREATE(paraMap));			
 	}
+	@Override
+	public void deleteCompanySupply(Map<String, Object> paraMap) {
+		productInfoDao.deleteCompanySupply(paraMap);	
+	}
+	@Override
+	public void deleteCompanyProduct(Map<String, Object> paraMap) {
+		productInfoDao.deleteCompanyProduct(paraMap);	
+	}
 }

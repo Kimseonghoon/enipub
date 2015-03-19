@@ -1,4 +1,3 @@
-
 var myGrid = new AXGrid();
 var DataGrid = {	
 	pageStart: function(){
@@ -32,8 +31,7 @@ var DataGrid = {
 	                        return "white";
 	                    }else{
 	                        return "white";
-	                    }
-	
+	                    }	
 	                }
 	            },
 	            page: {

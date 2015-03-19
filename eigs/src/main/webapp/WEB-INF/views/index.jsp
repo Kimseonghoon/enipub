@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" contentType="text/html; UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html><html><head><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>EIGS</title>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -14,50 +15,51 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/axisj/css/cocker/AXJ.min.css" rel="stylesheet">
 <link href="resources/axisj/css/cocker/AXGrid.css" rel="stylesheet">
+<link href="resources/axicon/axicon.min.css" rel="stylesheet">
 
 <style type="text/css">
 </style>
 </head>
 <body>
-<div class="container" style="max-width: none !important;width:1200px;margin-left:20px;margin-right:0;">
+<div class="container" style="max-width: none !important;width:1200px;margin-left:40px;margin-right:0;">
 	<div class="row" style="margin-top:30px;">
-		<div class="col-md-3 col-xs-3" style="padding-right:30px;">
+		<div class="col-md-3 col-xs-3" style="padding-right:40px;width:260px;">
 			<p class="left_title">
 				<strong>Enterprise Information</strong>
 			</p>
 			
 		    <ul id="nav-sidebar" class="nav nav-pills nav-stacked">
 		      <li>			      
-			  	<a href="#">일반정보</a>
+			  	<a href="#"><i class="axi axi-folder"></i>　일반정보</a>  
 			    <ul class="list-unstyled">
-			    	<li id="general/companyData">　·　Company Data</li>
-			    	<li id="general/companyOrg" class="DataGrid">　·　Company Organization</li>
-			    	<li id="general/companyStr">　·　Company Structure</li>
-			    	<li id="general/companyFinance" class="DataGrid selectedItem">　·　Company Finance</li>			      		
+			    	<li id="general/companyData">Company Data</li>
+			    	<li id="general/companyOrg" class="DataGrid">Company Organization</li>
+			    	<li id="general/companyStr">Company Structure</li>
+			    	<li id="general/companyFinance" class="DataGrid selectedItem">Company Finance</li>			      		
 			    </ul>
 		      </li>			      	
 		      
 		      <li>
-		      	<a href="#">품질활동</a>
+		      	<a href="#"><i class="axi axi-folder"></i>　품질활동</a>
 		      	<ul class="list-unstyled">
-			    	<li id="quality/companyInno">　·　Company Inno＆Improve</li>
-			    	<li id="quality/companyQuality" class="DataGrid">　·　Company Quality</li>
-			    	<li id="quality/companyHSE" class="DataGrid">　·　Company HSE Statistic</li>
-			    	<li id="quality/companySkill" class="DataGrid">　·　Company Skill＆TrainG</li>			      		
-			    	<li id="quality/companyHR" class="DataGrid">　·　Company HR</li>
+			    	<li id="quality/companyInno">Company Inno＆Improve</li>
+			    	<li id="quality/companyQuality" class="DataGrid">Company Quality</li>
+			    	<li id="quality/companyHSE" class="DataGrid">Company HSE Statistic</li>
+			    	<li id="quality/companySkill" class="DataGrid">Company Skill＆TrainG</li>			      		
+			    	<li id="quality/companyHR" class="DataGrid">Company HR</li>
 			    </ul>
 		      </li>
 		      <li>
-		      	<a href="#">제품정보</a>
+		      	<a href="#"><i class="axi axi-folder"></i>　제품정보</a>
 		      	<ul class="list-unstyled">
-			    	<li id="product/companySupply" class="DataGrid">　·　Company Supply History</li>
-			    	<li id="product/companyProduct" class="DataGrid">　·　Company Product＆Services</li> 
+			    	<li id="product/companySupply" class="DataGrid">Company Supply History</li>
+			    	<li id="product/companyProduct" class="DataGrid">Company Product＆Services</li> 
 			    </ul>
 		      </li>
 		      <li>
-		      	<a href="#">Data Import</a>
+		      	<a href="#"><i class="axi axi-folder"></i>　Data Import</a>
 		      	<ul class="list-unstyled">
-		      		<li id="import/dataImport">　·　Company Data Import</li>
+		      		<li id="import/dataImport">Company Data Import</li>
 			    </ul>
 		      </li>
 		    </ul>
@@ -88,8 +90,9 @@
 <script src="resources/axisj/js/AXGrid.js"></script>
 
 <script type="text/javascript">	
+
 // 임시 ID
-var COMPANY_ID = "e00cabae-6687-4d03-8d5b-0da646e4d8dc";
+var COMPANY_ID = "${id}";
 var UUID_NAME = "";
 var UUID = "";
 var VIEW_NAME  = "";
@@ -132,7 +135,7 @@ var LoadView = function() {
 
 
 $(document).ready(function() {
-	SideBar.addEvent();		
+	SideBar.addEvent();
 	$("#nav-sidebar li ul li").first().click();
 });
 

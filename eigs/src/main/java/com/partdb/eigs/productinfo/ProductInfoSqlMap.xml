@@ -76,4 +76,20 @@
 		WHERE
 			productcode=#{id}
 	</update>	
+	
+	<delete id="deleteCompanySupply" parameterType="hashMap">
+		DELETE 
+		FROM
+			companysupplyhistory
+		WHERE
+			projectcode=#{id}
+	</delete>
+	
+	<delete id="deleteCompanyProduct" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyproducts
+		WHERE
+			productcode=#{id}
+	</delete>
 </mapper>

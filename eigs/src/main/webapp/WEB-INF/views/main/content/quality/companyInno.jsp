@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script src="resources/js/DataForm.js" type="text/javascript"></script>
+
 <div class="data-form">	
 	<p class="right_title">
 		<strong>Company Inno & Improve</strong>
 	</p>
 	
-	<div class="row" style="padding-bottom:8px;">	
-		<div class="col-md-12 col-xs-12">
-			<div style="float:right;">
-				<button id="updateBtn" style="" type="button" class="btn btn-primary btn-sm">수정</button>
-				<button style="" type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-		</div>
-	</div>
-		
 	<div id="dg-row" class="row">
 		<div class="col-md-4 col-xs-4">
 			<div id="own_rnd">
@@ -26,7 +20,7 @@
 	
 		<div class="col-md-4 col-xs-4">
 			<div id="corporate_rnd">
-				<div class="title" style="line-height:22px">공동 R&D프로그램보유</div>
+				<div class="title" style="">공동 R&D프로그램보유</div>
 	
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />
@@ -126,7 +120,7 @@
 	
 		<div class="col-md-4 col-xs-4">
 			<div id="patents2year">
-				<div class="title" style="line-height:22px;">최근 2년간 출원된 특허</div>
+				<div class="title" style="">최근 2년간 출원된 특허</div>
 	
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />
@@ -154,6 +148,18 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="row" style="padding-top:8px;">	
+		<div class="col-md-12 col-xs-12">
+			<div style="float:right;">
+				<button id="updateBtn" style="" type="button" class="btn btn-warning btn-sm">
+					<i class="fa fa-pencil fa-lg"></i>수정
+				</button>
+				<button id="deleteBtn" style="" type="button" class="btn btn-danger btn-sm">
+					<i class="fa fa-trash-o fa-lg"></i>삭제
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 
-<script src="resources/js/DataForm.js" type="text/javascript"></script>

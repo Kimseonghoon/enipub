@@ -23,4 +23,13 @@ public interface iGeneralInfoService {
 	public void updateCompanyStr(Map<String, Object> paraMap);
 
 	public void updateCompanyFinance(Map<String, Object> paraMap);
+
+	public void deleteCompanyData(Map<String, Object> paraMap);
+
+	public void deleteCompanyOrg(Map<String, Object> paraMap);
+	
+	public void deleteCompanyStr(Map<String, Object> paraMap);
+
+	public void deleteCompanyFinance(Map<String, Object> paraMap);
+
 }

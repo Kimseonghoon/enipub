@@ -18,9 +18,17 @@ public interface iGeneralInfoDao {
 
 	public void updateCompanyData(Map<String, String> paraMap);
 
-	public void updateCompanyOrg(Map<String, String> paramCreate);
+	public void updateCompanyOrg(Map<String, String> paraMap);
 
-	public void updateCompanyStr(Map<String, String> paramCreate);
+	public void updateCompanyStr(Map<String, String> paraMap);
 
-	public void updateCompanyFinance(Map<String, String> paramCreate);
+	public void updateCompanyFinance(Map<String, String> paraMap);
+
+	public void deleteCompanyData(Map<String, Object> paraMap);
+
+	public void deleteCompanyOrg(Map<String, Object> paraMap);
+
+	public void deleteCompanyStr(Map<String, Object> paraMap);
+
+	public void deleteCompanyFinance(Map<String, Object> paraMap);
 }

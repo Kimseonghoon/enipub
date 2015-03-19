@@ -15,4 +15,8 @@ public interface iProductInfoDao {
 	public void updateCompanySupply(Map<String, String> paramcreate);
 
 	public void updateCompanyProduct(Map<String, String> paramcreate);
+
+	public void deleteCompanySupply(Map<String, Object> paraMap);
+
+	public void deleteCompanyProduct(Map<String, Object> paraMap);
 }
