@@ -70,7 +70,7 @@ public class Import extends HttpServlet {
         	List<String> InsertList = new ArrayList<String>();
         	
         	XSSFWorkbook TemplateData = new XSSFWorkbook(new FileInputStream(new File(file.getPath())));
-			
+			System.out.println("*********" + SelectedItem);
 			if(SelectedItem.equals("All Item"))
 			{
 				String DeleteSQL = "DELETE FROM address;DELETE FROM companybaseinfo;DELETE FROM companyfinance;"

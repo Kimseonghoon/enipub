@@ -69,7 +69,7 @@
 			</div>
 		</div>
 		
-		<div class="col-md-4 col-xs-4">
+		<div class="col-md-12 col-xs-12">
 			<div id="vilocation_law">
 				<div class="title">법률위반</div>
 	

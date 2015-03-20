@@ -21,9 +21,9 @@
 </style>
 </head>
 <body>
-<div class="container" style="max-width: none !important;width:1200px;margin-left:40px;margin-right:0;">
-	<div class="row" style="margin-top:30px;">
-		<div class="col-md-3 col-xs-3" style="padding-right:40px;width:260px;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-xs-3" style="padding-right:30px;width:240px;">
 			<p class="left_title">
 				<strong>Enterprise Information</strong>
 			</p>
@@ -65,15 +65,14 @@
 		    </ul>
 		</div>
 
-		<div id="r-pane" class="col-md-9 col-xs-9" style="">
+		<div id="r-pane" class="col-md-9 col-xs-9" style="width:900px;margin-right:10px;">
 		
 		</div>
 	</div>
 	<!-- <div id="log" style="position: fixed; height: 100px; right: 0; left: 0; bottom: 0; border: 1px dashed black;"></div> -->
 </div>
-
 <div id="loading_container" style="height:100%;width:100%;top:0;position:absolute;background-color:#eee;opacity:0.8;z-index:999;display: none;">
-	<div style="maring: 0;background: white;position:absolute;top:50%;left:50%;margin-right:-50%;transform: translate(-50%,-50%);width:150px;height:50px; border:2px solid #4D6F94; ">
+	<div style="maring: 0;background: white;position:absolute;top:40%;left:50%;margin-right:-50%;transform: translate(-50%,-50%);width:150px;height:50px; border:2px solid #4D6F94; ">
 		<img style="margin:12px 0 0 18px" src="resources/img/ajax-loader.gif"/>
 		<div style="float:right;margin-top:16px;margin-right:22px; font-size: 13px;color:4D6F94">Loading.. </div>
 	</div>
@@ -84,19 +83,22 @@
 <script src="resources/jquery/ajaxForm/jquery.form.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="resources/bootstrap/js/addon/bootstrap-filestyle.min.js"></script>
 
 <!-- axisj js block -->
 <script src="resources/axisj/js/AXJ.min.js"></script>
 <script src="resources/axisj/js/AXGrid.js"></script>
+<script src="resources/axisj/js/AXCore.js"></script>
 
 <script type="text/javascript">	
 
-// 임시 ID
 var COMPANY_ID = "${id}";
 var UUID_NAME = "";
 var UUID = "";
 var VIEW_NAME  = "";
 var VIEW_TYPE  = "";
+
+var $FOG = $("<div>").css("visibility","hidden").css("background-color","#eee").css("opacity","0.4").css("position","absolute").css("top","0").css("left","0").css("right","0").css("bottom","0").css("z-index","999").appendTo("body");
 
 var SideBar = {
 	addEvent: function() {
@@ -121,7 +123,6 @@ var SideBar = {
 				VIEW_TYPE = "DataForm";
 			}
 			LoadView();
-				    
 		});
 	}	
 };

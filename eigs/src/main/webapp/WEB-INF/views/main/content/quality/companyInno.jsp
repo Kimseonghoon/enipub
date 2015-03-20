@@ -100,7 +100,7 @@
 		
 		<div class="col-md-12 col-xs-12">
 			<div id="recent_survey">
-				<div class="title" style="line-height:70px;">최근의 예를 기술</div>
+				<div class="title" style="line-height:62px;">최근의 예를 기술</div>
 	
 				<div class="value">
 					<textarea class="form-control" rows="3" cols="135" style="padding-top:0;font-size:12px;"></textarea>

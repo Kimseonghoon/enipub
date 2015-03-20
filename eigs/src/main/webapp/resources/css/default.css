@@ -38,7 +38,7 @@ src:url('/eigs/resources/font/Tsddo_M.eot?#iefix') format('embedded-opentype'),
 }
 
 html, body{	
-	overflow-x:hidden;
+	overflow-x:hidden;	
 }
 a:active {
 	outline:none;
@@ -176,7 +176,13 @@ padding-left:0;
 	border:1px solid #4972B9 !important;
 	background:#5786D6 !important;	
 }
-
+.btn-info {
+	border:1px solid #2756A6 !important;
+	background-color:#5786D6 !important;
+}
+.btn-info:hover {
+	background-color:#3766B6 !important;
+}
 .AXGrid .AXgridScrollBody .AXGridBody .gridBodyTable tbody tr.selected td {
 	background:#5786D6 !important;
 	z-index:0;

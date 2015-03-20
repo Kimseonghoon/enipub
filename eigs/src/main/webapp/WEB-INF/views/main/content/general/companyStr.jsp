@@ -73,10 +73,10 @@
 				<div class="title">주식공개</div>
 	
 				<div class="value" style="margin-top:10px;">
-					<input style="width:40px;" type="radio" name="optradio">예
+					<input style="width:40px;" type="radio" name="optradio" value="0">예
 				</div>
 				<div class="value" style="margin-top:10px;">
-					<input style="width:40px;" type="radio" name="optradio">아니요
+					<input style="width:40px;" type="radio" name="optradio" value="1">아니요
 				</div>
 			</div>
 		</div>
