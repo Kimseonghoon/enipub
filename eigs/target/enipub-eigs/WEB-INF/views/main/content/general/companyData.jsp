@@ -7,15 +7,6 @@
 		<strong>Company Data</strong>
 	</p>
 	
-	<div class="row" style="padding-bottom:8px;">	
-		<div class="col-md-12 col-xs-12">
-			<div style="float:right;">
-				<button id="updateBtn" style="" type="button" class="btn btn-primary btn-sm">수정</button>
-				<button id="deleteBtn" style="" type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-		</div>
-	</div>
-
 	<div id="dg-row" class="row">
 		<div class="col-md-4 col-xs-4">
 			<div id="companyname">
@@ -46,10 +37,10 @@
 			<div id="postcode">
 				<div class="title">본사우편번호</div>
 				<div class="value">
-					<input class="form-control input-sm" style="width:123px;" type="text" />
+					<input class="form-control input-sm" style="width:114px;" type="text" />
 				</div>
 				<div class="value">
-					<button class="btn btn-primary btn-sm" style="">검색</button>
+					<button class="btn btn-info btn-sm" style=""><i class="fa fa-search"></i>검색</button>
 				</div>
 			</div>
 		</div>	
@@ -150,83 +141,17 @@
 			</div>
 		</div>	
 	</div>
-	
-	<!-- 지사정보 -->
-	<!-- <div id="dg-row" class="row" style="margin-top:20px;">
-		<div class="col-md-4 col-xs-4">
-			<div id="">
-				<div class="title">지사우편번호</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:123px;" type="text" />
-				</div>
-				<div class="value">
-					<button class="btn btn-primary btn-sm" style="">검색</button>
-				</div>
-			</div>
-		</div>	
-		
-		<div class="col-md-8 col-xs-8">
-			<div id="">
-				<div class="title">지사주소</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:200px;" type="text" />
-				</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:280px;" type="text" />
-				</div>
-			</div>
-		</div>	
-		
-		<div class="col-md-4 col-xs-4">
-			<div id="">
-				<div class="title">국가</div>
-				<div class="value">
-					<input class="form-control input-sm" style="" type="text" />
-				</div>
+	<div class="row" style="padding-top:8px;">	
+		<div class="col-md-12 col-xs-12">
+			<div style="float:right;">
+				<button id="updateBtn" style="" type="button" class="btn btn-warning btn-sm">
+					<i class="fa fa-pencil fa-lg"></i>수정
+				</button>
+				<button id="deleteBtn" style="" type="button" class="btn btn-danger btn-sm">
+					<i class="fa fa-trash-o fa-lg"></i>삭제
+				</button>
 			</div>
 		</div>
-	
-		<div class="col-md-4 col-xs-4">
-			<div id="" class="form-tel">
-				<div class="title">전화</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:42px;" type="text" />
-				</div>
-				<div class="value">
-					<label>-</label>
-				</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:42px;" type="text" />
-				</div>
-				<div class="value">
-					<label>-</label>
-				</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:51px;" type="text" />
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-md-4 col-xs-4">
-			<div id="" class="form-tel">
-				<div class="title">팩스</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:42px;" type="text" />
-				</div>
-				<div class="value">
-					<label>-</label>
-				</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:42px;" type="text" />
-				</div>
-				<div class="value">
-					<label>-</label>
-				</div>
-				<div class="value">
-					<input class="form-control input-sm" style="width:51px;" type="text" />
-				</div>
-			</div>
-		</div>
-	</div> -->
+	</div>
 </div>
 

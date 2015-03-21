@@ -54,10 +54,11 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		
 		String user = "postgres";
-		String password = "1234";
 		String driver = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://localhost:5432/EIGS_DB";
-		
+/*		String url = "jdbc:postgresql://localhost:5433/EIGS_DB";
+		String password = "postgre";*/
+		String url = "jdbc:postgresql://112.160.65.98:5432/EIGS_DB";
+		String password = "1234";
 		Connection conn = null;
 		try {
 			Class.forName(driver);

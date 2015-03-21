@@ -13,7 +13,7 @@ public class connectionProvider {
 		String userID="postgres";
 		String userPass="1234";
 		
-		/*String jdbcUrl="jdbc:postgresql://localhost:5433/EIGS_DB";
+/*		String jdbcUrl="jdbc:postgresql://localhost:5433/EIGS_DB";
 		String userID="postgres";
 		String userPass="postgre";*/
 		

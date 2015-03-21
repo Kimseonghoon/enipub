@@ -94,7 +94,8 @@ var DataForm = {
 	FormRadio: function($InputRadio, v) {
 		//console.log(v);
 		$InputRadio.parent().parent().find(".value").each(function(e) {
-			if(e.toString()==v.toString()) {
+			if(e.toString()==v.toString()) {				
+				$(this).find("input").attr("checked",true);
 			}
 		});
 	}
@@ -145,84 +146,111 @@ var fnCalendar = {
 var btnEvent = {
 	updateBtn: function() {
 		$("#updateBtn").on("click", function() {
-						
-			var i=0;
-			jsonArr = [];
-			$(".data-form #dg-row > div > div").each(function() {	
-				var key = $(this).attr("id");
-				var val = $(this).find(".value input").val();
-				
-				if($(this).hasClass("form-tel")) {
-					val = $(this).find(".form-tel-1").val()+"-"+$(this).find(".form-tel-2").val()+"-"+$(this).find(".form-tel-3").val();
-				} else if($(this).hasClass("form-email")) {
-					val = $(this).find(".form-email-1").val()+"@"+$(this).find(".form-email-2").val();
-				} else if($(this).hasClass("form-radio")) {
-					$(this).find(".value").each(function(e) {
-						
-					});
-				}
-				
-				jsonArr.push({
-					key: key,
-					val: val				
-				});
+			var halfClientHeight = (document.body.clientHeight / 2)-100;
+			dialog.push({
+			    body:'<b>'+$(".right_title > strong").html()+' </b> 데이터를 수정하시겠습니까?', top:halfClientHeight , type:'Warning', buttons:[
+			        {buttonValue:'확인', buttonClass:'Red W60', onClick:btnEvent.updateData, data:'data1'},
+			        {buttonValue:'취소', buttonClass:'W60', data:'data1'}
+			    ]
 			});
-						
-			var tmpId = COMPANY_ID;		
-			$("#r-pane").find("div").each(function() {
-				if($(this).hasClass("data-table")) {
-					tmpId = UUID;
-				}
-			});
+			$(".AXNotificationHead").css("visibility","hidden");
+			$(".AXNotification").css("height","150px").css("width","330px");
 			
-			var request = $.ajax({
-				url : "/eigs/updateData.do",
-				type : "POST",
-				data : {
-					id : tmpId,
-					viewName : VIEW_NAME,
-					type: VIEW_TYPE,
-					updateData: jsonArr
-				},
-				dataType : "html"
-			});
-
-			request.done(function(msg) {
-				DataForm.getData();	
-			});
-
-			request.fail(function(jqXHR, textStatus) {
-				alert("Request failed: " + textStatus);
-			});
+			$FOG.css("visibility","visible");
 		});
 	},
+	updateData: function() {
+		var i=0;
+		jsonArr = [];
+		$(".data-form #dg-row > div > div").each(function() {	
+			var key = $(this).attr("id");
+			var val = $(this).find(".value input").val();
+			
+			if($(this).hasClass("form-tel")) {
+				val = $(this).find(".form-tel-1").val()+"-"+$(this).find(".form-tel-2").val()+"-"+$(this).find(".form-tel-3").val();
+			} else if($(this).hasClass("form-email")) {
+				val = $(this).find(".form-email-1").val()+"@"+$(this).find(".form-email-2").val();
+			} else if($(this).hasClass("form-radio")) {
+				val = $(this).find(":input[name=optradio]:radio:checked").val();
+			}
+			
+			jsonArr.push({
+				key: key,
+				val: val				
+			});
+		});
+					
+		var tmpId = COMPANY_ID;		
+		$("#r-pane").find("div").each(function() {
+			if($(this).hasClass("data-table")) {
+				tmpId = UUID;
+			}
+		});
+		
+		var request = $.ajax({
+			url : "/eigs/updateData.do",
+			type : "POST",
+			data : {
+				id : tmpId,
+				viewName : VIEW_NAME,
+				type: VIEW_TYPE,
+				updateData: jsonArr
+			},
+			dataType : "html"
+		});
+
+		request.done(function(msg) {
+			DataForm.getData();	
+			toast.push({body:'<b>'+$(".right_title > strong").html()+' </b> 데이터가 수정되었습니다', type:'Warning'});
+		});
+
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + textStatus);
+		});
+	},
+	
 	deleteBtn: function() {
 		$("#deleteBtn").on("click", function() {
-			var tmpId = COMPANY_ID;		
-			$("#r-pane").find("div").each(function() {
-				if($(this).hasClass("data-table")) {
-					tmpId = UUID;
-				}
+			var halfClientHeight = (document.body.clientHeight / 2)-100;
+			dialog.push({
+			    body:'<b>'+$(".right_title > strong").html()+' </b> 데이터를 삭제하시겠습니까?', top:halfClientHeight , type:'Caution', buttons:[
+			        {buttonValue:'확인', buttonClass:'Red W60', onClick:btnEvent.deleteData, data:'data1'},
+			        {buttonValue:'취소', buttonClass:'W60', data:'data1'}
+			    ]
 			});
+			$(".AXNotificationHead").css("visibility","hidden");
+			$(".AXNotification").css("height","150px").css("width","330px");
 			
-			var request = $.ajax({
-				url : "/eigs/deleteData.do",
-				type : "POST",
-				data : {
-					id : tmpId,
-					viewName : VIEW_NAME,
-					type: VIEW_TYPE
-				},
-				dataType : "html"
-			});
+			$FOG.css("visibility","visible");			
+		});
+	},
+	deleteData: function() {
+		var tmpId = COMPANY_ID;		
+		$("#r-pane").find("div").each(function() {
+			if($(this).hasClass("data-table")) {
+				tmpId = UUID;
+			}
+		});
+		
+		var request = $.ajax({
+			url : "/eigs/deleteData.do",
+			type : "POST",
+			data : {
+				id : tmpId,
+				viewName : VIEW_NAME,
+				type: VIEW_TYPE
+			},
+			dataType : "html"
+		});
 
-			request.done(function(msg) {
-				DataForm.getData();	
-			});
+		request.done(function(msg) {
+			toast.push({body:'<b>'+$(".right_title > strong").html()+' </b> 데이터가 삭제되었습니다', type:'Warning'});
+			$("#nav-sidebar .active").click();
+			
+		});
 
-			request.fail(function(jqXHR, textStatus) {
-				alert("Request failed: " + jqXHR.status);
-			});
+		request.fail(function(jqXHR, textStatus) {
+			alert("Request failed: " + jqXHR.status);
 		});
 	}
 };

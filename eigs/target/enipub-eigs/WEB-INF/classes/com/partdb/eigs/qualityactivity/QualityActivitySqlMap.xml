@@ -173,4 +173,44 @@
 		WHERE
 			empnum=#{id}
 	</update>	
+	
+	<delete id="deleteCompanyInno" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyinnonimprove
+		WHERE
+			innouuid=#{id}
+	</delete>
+	
+	<delete id="deleteCompanyQuality" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyquality
+		WHERE
+			qualityuuid=#{id}
+	</delete>
+	
+	<delete id="deleteCompanyHSE" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyhsestatistic
+		WHERE
+			hseuuid=#{id}
+	</delete>
+	
+	<delete id="deleteCompanySkill" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyskilltrain
+		WHERE
+			skilluuid=#{id}
+	</delete>
+	
+	<delete id="deleteCompanyHR" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyhr
+		WHERE
+			empnum=#{id}
+	</delete>
 </mapper>

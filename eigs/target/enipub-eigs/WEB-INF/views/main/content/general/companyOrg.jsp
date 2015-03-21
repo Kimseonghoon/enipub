@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script src="resources/js/DataForm.js" type="text/javascript"></script>
+
 <div class="data-form">
 	<p class="right_title">
 		<strong>Company Organization Detail</strong>
 	</p>
-	
-	<div class="row" style="padding-bottom:8px;">	
-		<div class="col-md-12 col-xs-12">
-			<div style="float:right;">
-				<button id="updateBtn" style="" type="button" class="btn btn-primary btn-sm">수정</button>
-				<button id="deleteBtn" style="" type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-		</div>
-	</div>
 		
 	<div id="dg-row" class="row">
 		<div class="col-md-4 col-xs-4">
@@ -67,10 +61,10 @@
 			<div id="postcode">
 				<div class="title">우편번호</div>
 				<div class="value">
-					<input class="form-control input-sm" style="width:123px;" type="text" />
+					<input class="form-control input-sm" style="width:114px;" type="text" />
 				</div>
 				<div class="value">
-					<button class="btn btn-primary btn-sm" style="">검색</button>
+					<button class="btn btn-info btn-sm" style=""><i class="fa fa-search"></i>검색</button>
 				</div>
 			</div>
 		</div>	
@@ -132,6 +126,17 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="row" style="padding-top:8px;">	
+		<div class="col-md-12 col-xs-12">
+			<div style="float:right;">
+				<button id="updateBtn" style="" type="button" class="btn btn-warning btn-sm">
+					<i class="fa fa-pencil fa-lg"></i>수정
+				</button>
+				<button id="deleteBtn" style="" type="button" class="btn btn-danger btn-sm">
+					<i class="fa fa-trash-o fa-lg"></i>삭제
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
-
-<script src="resources/js/DataForm.js" type="text/javascript"></script>

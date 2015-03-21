@@ -169,6 +169,7 @@
 		WHERE
 			companycode=#{id}
 	</delete>
+	
 	<delete id="deleteCompanyOrg" parameterType="hashMap">
 		DELETE 
 		FROM
@@ -177,6 +178,21 @@
 			orguuid=#{id}
 	</delete>
 	
+	<delete id="deleteCompanyStr" parameterType="hashMap">
+		DELETE 
+		FROM
+			companystructure
+		WHERE
+			companycode=#{id}
+	</delete>
+	
+	<delete id="deleteCompanyFinance" parameterType="hashMap">
+		DELETE 
+		FROM
+			companyfinance
+		WHERE
+			financeuuid=#{id}
+	</delete>
 	<!-- 
 	<select id="selectInterCodeItems" resultType="java.util.HashMap" parameterType="hashmap">
 		SELECT

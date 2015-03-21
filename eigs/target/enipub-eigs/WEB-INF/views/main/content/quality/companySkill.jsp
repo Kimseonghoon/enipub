@@ -6,15 +6,6 @@
 	<p class="right_title">
 		<strong>Company Skil & Training</strong>
 	</p>
-	
-	<div class="row" style="padding-bottom:8px;">	
-		<div class="col-md-12 col-xs-12">
-			<div style="float:right;">
-				<button id="updateBtn" style="" type="button" class="btn btn-primary btn-sm">수정</button>
-				<button style="" type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-		</div>
-	</div>
 		
 	<div id="dg-row" class="row">	
 		<div class="col-md-4 col-xs-4">
@@ -122,6 +113,19 @@
 				<div class="value">
 					<input class="form-control input-sm" style="" type="text" />
 				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row" style="padding-top:8px;">	
+		<div class="col-md-12 col-xs-12">
+			<div style="float:right;">
+				<button id="updateBtn" style="" type="button" class="btn btn-warning btn-sm">
+					<i class="fa fa-pencil fa-lg"></i>수정
+				</button>
+				<button id="deleteBtn" style="" type="button" class="btn btn-danger btn-sm">
+					<i class="fa fa-trash-o fa-lg"></i>삭제
+				</button>
 			</div>
 		</div>
 	</div>

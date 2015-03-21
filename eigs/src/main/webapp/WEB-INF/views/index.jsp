@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container" style="width:1164px;">
 	<div class="row">
 		<div class="col-md-3 col-xs-3" style="padding-right:30px;width:240px;">
 			<p class="left_title">
